@@ -1,24 +1,16 @@
-# Please edit the object below. Lines beginning with a '#' will be ignored,
-# and an empty file will abort the edit. If an error occurs while saving this file will be
-# reopened with the relevant failures.
-#
-apiVersion: v1
-data:
-  KYRIBA_DATASOURCE_PASSWORD: T2NwMjAyMQ==
-  KYRIBA_DATASOURCE_USERNAME: WFhLWVJJQkE=
-  SPRING_DATASOURCE_JDBC-URL: amRiYzpvcmFjbGU6dGhpbjpAMTAuMjEuNjEuMTA4OjE1ODE6UkVDRUJT
-  SPRING_DATASOURCE_PASSWORD: cmUwZHIxMjA3MDI=
-  SPRING_DATASOURCE_USERNAME: WFhJUFJPQ1VSRU1FTlQ=
-  SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA: WFhJUFJPQ1VSRU1FTlQ=
-kind: Secret
-metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","data":{"SPRING_DATASOURCE_PASSWORD":"cmUwZHIxMjA3MDI=","SPRING_DATASOURCE_JDBC-URL":"amRiYzpvcmFjbGU6dGhpbjpAMTAuMjEuNjEuMTA4OjE1ODE6UkVDRUJT","SPRING_DATASOURCE_USERNAME":"WFhJUFJPQ1VSRU1FTlQ=","SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA":"WFhJUFJPQ1VSRU1FTlQ="},"kind":"Secret","metadata":{"annotations":{},"name":"backend-oracle-ebs-config","namespace":"lotus-be"},"type":"Opaque"}
-  creationTimestamp: "2018-11-22T23:24:04Z"
-  name: backend-oracle-ebs-config
-  namespace: lotus-be
-  resourceVersion: "380977639"
-  selfLink: /api/v1/namespaces/lotus-be/secrets/backend-oracle-ebs-config
-  uid: b3dfbbba-eead-11e8-b8bc-005056970c49
-type: Opaque
+<bean id="requestFactory"
+    class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+    <property name="proxy">
+        <bean id="proxy" class="java.net.Proxy">
+            <constructor-arg>
+                <util:constant static-field="java.net.Proxy.Type.HTTP"/>
+            </constructor-arg>
+            <constructor-arg>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="123.0.0.1"/>
+                    <constructor-arg value="8080"/>
+                </bean>
+            </constructor-arg>
+        </bean>
+    </property>
+</bean>
