@@ -1,2 +1,112 @@
-https://git.digilab.ocpgroup.ma/integration/procurement-apis/-/merge_requests/1173
-52d0f042658b6dca265240950ebb15910025f9cf
+1. Overview
+
+In this short tutorial, we’ll discuss how to implement and inject the ResponseErrorHandler interface in a RestTemplate instance to gracefully handle the HTTP errors returned by remote APIs.
+2. Default Error Handling
+
+By default, the RestTemplate will throw one of these exceptions in the case of an HTTP error:
+
+    HttpClientErrorException – in the case of HTTP status 4xx
+    HttpServerErrorException – in the case of HTTP status 5xx
+    UnknownHttpStatusCodeException – in the case of an unknown HTTP status
+
+All of these exceptions are extensions of RestClientResponseException.
+
+Obviously, the simplest strategy to add custom error handling is to wrap the call in a try/catch block. Then we can process the caught exception as we see fit.
+
+However, this simple strategy doesn’t scale well as the number of remote APIs or calls increases. It would be more efficient if we could implement a reusable error handler for all of our remote calls.
+3. Implementing a ResponseErrorHandler
+
+A class that implements ResponseErrorHandler will read the HTTP status from the response and either:
+
+    Throw an exception that is meaningful to our application
+    Simply ignore the HTTP status and let the response flow continue without interruption
+
+We need to inject the ResponseErrorHandler implementation into the RestTemplate instance.
+
+Thus, we can use the RestTemplateBuilder to build the template, and replace the DefaultResponseErrorHandler in the response flow.
+
+So let’s first implement our RestTemplateResponseErrorHandler:
+
+@Component
+public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
+
+    @Override
+    public boolean hasError(ClientHttpResponse httpResponse) throws IOException {
+        return httpResponse.getStatusCode().is5xxServerError() || 
+            httpResponse.getStatusCode().is4xxClientError();
+    }
+
+    @Override
+    public void handleError(ClientHttpResponse httpResponse) throws IOException {
+        if (httpResponse.getStatusCode().is5xxServerError()) {
+            //Handle SERVER_ERROR
+            throw new HttpClientErrorException(httpResponse.getStatusCode());
+        } else if (httpResponse.getStatusCode().is4xxClientError()) {
+            //Handle CLIENT_ERROR
+            if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new NotFoundException();
+            }
+        }
+    }
+}
+
+Then we can build the RestTemplate instance using the RestTemplateBuilder to introduce our RestTemplateResponseErrorHandler:
+
+@Service
+public class BarConsumerService {
+
+    private RestTemplate restTemplate;
+
+    @Autowired
+    public BarConsumerService(RestTemplateBuilder restTemplateBuilder) {
+        RestTemplate restTemplate = restTemplateBuilder
+          .errorHandler(new RestTemplateResponseErrorHandler())
+          .build();
+    }
+
+    public Bar fetchBarById(String barId) {
+        return restTemplate.getForObject("/bars/4242", Bar.class);
+    }
+
+}
+
+4. Testing Our Implementation
+
+Finally, we’ll test this handler by mocking a server and returning a NOT_FOUND status:
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { NotFoundException.class, Bar.class })
+@RestClientTest
+public class RestTemplateResponseErrorHandlerIntegrationTest {
+
+    @Autowired 
+    private MockRestServiceServer server;
+ 
+    @Autowired 
+    private RestTemplateBuilder builder;
+
+    @Test
+    public void  givenRemoteApiCall_when404Error_thenThrowNotFound() {
+        Assertions.assertNotNull(this.builder);
+        Assertions.assertNotNull(this.server);
+
+        RestTemplate restTemplate = this.builder
+          .errorHandler(new RestTemplateResponseErrorHandler())
+          .build();
+
+        this.server
+          .expect(ExpectedCount.once(), requestTo("/bars/4242"))
+          .andExpect(method(HttpMethod.GET))
+          .andRespond(withStatus(HttpStatus.NOT_FOUND));
+
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            Bar response = restTemplate.getForObject("/bars/4242", Bar.class);
+        });
+    }
+}
+
+5. Conclusion
+
+In this article, we presented a solution to implement and test a custom error handler for a RestTemplate that converts HTTP errors into meaningful exceptions.
+
+As always, the code presented in this article is available over on Github.
