@@ -1,5 +1,6 @@
-https://git.digilab.ocpgroup.ma/lotus/lotus-services/-/merge_requests/1069 5b6235fbd1bfce45312102db0dc0dbc444cbf413
-https://git.digilab.ocpgroup.ma/lotus/lotus-services/-/merge_requests/1068 347816f180545b0508741ad4b63c4052d4414dab
-https://git.digilab.ocpgroup.ma/ecosystemplateform/ecosystem-portal/-/merge_requests/395 ad5a1ef069a2c178ed0f3f6ac31dfc41d57566a5
-https://git.digilab.ocpgroup.ma/ecosystemplateform/ecosystem-portal/-/merge_requests/394 1aa391d7119fd2908f14ddc857c0a77bcc0ec467
-
+@Autowired
+    public BarConsumerService(RestTemplateBuilder restTemplateBuilder) {
+        RestTemplate restTemplate = restTemplateBuilder
+          .errorHandler(new RestTemplateResponseErrorHandler())
+          .build();
+    }
