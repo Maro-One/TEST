@@ -33,3 +33,5 @@ public RestTemplate restTemplate(RestTemplateBuilder builder) {
     return builder.additionalCustomizers(new ProxyCustomizer()).build();
 }
 
+// https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5
+implementation group: 'org.apache.httpcomponents.core5', name: 'httpcore5', version: '5.3.2'
