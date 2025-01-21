@@ -1,37 +1,26 @@
+4. Using RestTemplateCustomizer
 
+Another approach is to use a RestTemplateCustomizer with RestTemplateBuilder to build a customized RestTemplate.
 
-Spring has a good documentation using a Customizer to determine different proxy
+Let’s start defining a ProxyCustomizer:
 
-public class ProxyCustomizer implements RestTemplateCustomizer {
+class ProxyCustomizer implements RestTemplateCustomizer {
 
     @Override
     public void customize(RestTemplate restTemplate) {
-        final String proxyUrl = "proxy.example.com";
-        final int port = 3128;
-
-        HttpHost proxy = new HttpHost(proxyUrl, port);
-        HttpClient httpClient = HttpClientBuilder.create().setRoutePlanner(new DefaultProxyRoutePlanner(proxy) {
-            @Override
-            protected HttpHost determineProxy(HttpHost target, HttpRequest request, HttpContext context)
-                    throws HttpException {
-                if (target.getHostName().equals("gturnquist-quoters.cfapps.io")) {
-                    return super.determineProxy(target, request, context);
-                }
-                return null;
-            }
-        }).build();
+        HttpHost proxy = new HttpHost(PROXY_SERVER_HOST, PROXY_SERVER_PORT);
+        HttpClient httpClient = HttpClientBuilder.create()
+            .setRoutePlanner(new DefaultProxyRoutePlanner(proxy))
+            .build();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
-
     }
-
 }
 
-and the call to apply the ProxyCustomizer is
+After that, we build our customized RestTemplate:
 
-@Bean
-public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder.additionalCustomizers(new ProxyCustomizer()).build();
-}
+RestTemplate restTemplate = new RestTemplateBuilder(new ProxyCustomizer()).build();
 
-// https://mvnrepository.com/artifact/org.apache.httpcomponents.core5/httpcore5
-implementation group: 'org.apache.httpcomponents.core5', name: 'httpcore5', version: '5.3.2'
+And finally, we use the RestTemplate to make requests that pass first through a proxy:
+
+ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://httpbin.org/get", String.class);
+assertThat(responseEntity.getStatusCode(), is(equalTo(HttpStatus.OK)));
