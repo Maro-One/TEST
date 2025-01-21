@@ -24,3 +24,5 @@ And finally, we use the RestTemplate to make requests that pass first through a 
 
 ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://httpbin.org/get", String.class);
 assertThat(responseEntity.getStatusCode(), is(equalTo(HttpStatus.OK)));
+
+implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.4.1'
