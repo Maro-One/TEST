@@ -38,3 +38,5 @@ Endpoint: https://bdcloudstorage.ocpgroup.ma
 Key Id: user_dm_stg_mining
 Secret Key: bfWU9gk+PXGImK+aimEnyoIavucWLsd+bEpCNLvQ
 Bucket Name: BDC_DM_STG_MINING
+
+https://github.com/Java-Techie-jt/s3-file-storage-example
