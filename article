@@ -1,0 +1,287 @@
+1. Overview
+
+In modern web applications, storing and managing files is a common requirement. Whether it’s user-uploaded content like images and documents or application-generated logs and reports, having a reliable and scalable storage backend is crucial.
+
+Amazon Simple Storage Service (S3) provided by Amazon Web Services (AWS) is one such cloud storage backend. For nearly two decades, S3 has cemented itself as the most widely used cloud storage backend due to its scalability, durability, and extensive feature set.
+
+In this tutorial, we’ll explore how to integrate Amazon S3 with our Java application.
+
+To follow this tutorial, we’ll need an active AWS account.
+2. Understanding Amazon S3 Terminology
+
+Before we dive into the implementation, let’s take a closer look at some of the Amazon S3 terminology that’ll help us follow along with this tutorial.
+
+In Amazon S3, a bucket serves as our main container for storing data, much like a root folder on our computer. Inside these buckets, we store objects, which can be anything from images and videos to text files and documents.
+
+Every object in S3 has a key, which is simply the full path name of our file within the bucket. For example, if we store a file named logo.jpg in a logical folder named baeldung, its key would be baeldung/logo.jpg. This key is what we use whenever we need to retrieve or manage an object.
+
+Amazon S3 is a regional service, so we need to choose an AWS region where it will reside when creating a bucket.
+3. Setting up the Project
+
+Before we can start interacting with the Amazon S3 service, we’ll need to include an SDK dependency and create a client connection.
+3.1. Dependencies
+
+Let’s start by adding the Amazon S3 dependency to our project’s pom.xml file:
+
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>s3</artifactId>
+    <version>2.29.0</version>
+</dependency>
+
+This dependency provides us with the S3Client and other related classes, which we’ll use to interact with the Amazon S3 service.
+3.2. Creating a Client Connection
+
+Now, we’ll need to create a client connection to access the Amazon S3 service.
+
+First, let’s use our security credentials to create an instance of AwsCredentials for authentication:
+
+String accessKey = "<AWS Access Key>";
+String secretKey = "<AWS Secret Key>";
+AwsCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+
+Then, let’s create an instance of the S3Client class against an AWS region:
+
+String regionName = "<AWS Region>";
+S3Client s3Client = S3Client
+  .builder()
+  .region(Region.of(regionName))
+  .credentialsProvider(StaticCredentialsProvider.create(credentials))
+  .build();
+
+The S3Client class is the main entry point for interacting with the Amazon S3 service and we’ll use it throughout the tutorial.
+4. Managing Buckets in Amazon S3
+
+Now that we’ve set up our project and created a client connection, let’s look at how we can manage buckets in Amazon S3.
+
+We’ll create a new class S3BucketOperationService that takes in an S3Client instance through its constructor.
+4.1. Creating a Bucket
+
+It’s important to note that even though S3 is a regional service, bucket names must be globally unique across all AWS accounts. In addition, our bucket name should adhere to a few naming rules.
+
+Now, once we’ve decided on our bucket name that complies with the defined naming rules, let’s create a new bucket using our S3Client object:
+
+String bucketName = "baeldung-bucket";
+s3Client.createBucket(request -> request.bucket(bucketName));
+
+On successful execution of the above code, our S3 bucket named baeldung-bucket will be created in the region we’d configured when creating the S3Client instance.
+
+If an S3 bucket already exists with this name, the createBucket() method will throw an exception.
+
+Therefore, it’s often useful to check if a bucket with the same name already exists beforehand:
+
+boolean bucketExists(String bucketName) {
+    try {
+        s3Client.headBucket(request -> request.bucket(bucketName));
+        return true;
+    }
+    catch (NoSuchBucketException exception) {
+        return false;
+    }
+}
+
+In our above implementation, we call the headBucket() method of S3Client. If the method call doesn’t throw a NoSuchBucketException, we know the bucket with the given name already exists.
+4.2. Listing Buckets
+
+Next, let’s look at how we can list all the S3 buckets present in our AWS account:
+
+List<Bucket> allBuckets = new ArrayList<>();
+String nextToken = null;
+
+do {
+    String continuationToken = nextToken;
+    ListBucketsResponse listBucketsResponse = s3Client.listBuckets(
+        request -> request.continuationToken(continuationToken)
+    );
+
+    allBuckets.addAll(listBucketsResponse.buckets());
+    nextToken = listBucketsResponse.continuationToken();
+} while (nextToken != null);
+return allBuckets;
+
+The listBuckets() method returns a maximum of 1000 buckets. So, we check the presence of the continuationToken and use it to make additional calls if necessary.
+
+This ensures our implementation works regardless of the number of buckets in our AWS account.
+4.3. Deleting a Bucket
+
+Finally, let’s see how we can delete an S3 bucket present in our AWS account:
+
+String bucketName = "baeldung-bucket";
+try {
+    s3Client.deleteBucket(request -> request.bucket(bucketName));
+} catch (S3Exception exception) {
+    if (exception.statusCode() == HttpStatus.SC_CONFLICT) {
+        throw new BucketNotEmptyException();
+    }
+    throw exception;
+}
+
+To delete a bucket, we simply call the deleteBucket() method, passing the bucket name in the request. However, it’s important to note that we can only delete an empty bucket. If there are objects present in the given S3 bucket, the deleteBucket() method throws an exception.
+
+We’ll look at how to delete objects later in the tutorial.
+5. Performing CRUD Operations in an S3 Bucket
+
+Now that we’ve learned how to manage our S3 buckets, let’s dive into performing CRUD operations on the objects within them. We’ll create a new class S3ObjectOperationService and use our S3Client instance to perform object level operations as well.
+5.1. Uploading Objects
+
+Let’s start by uploading an object in our S3 bucket:
+
+String bucketName = "baeldung-bucket";
+File file = new File("path-to-file");
+
+Map<String, String> metadata = new HashMap<>();
+metadata.put("company", "Baeldung");
+metadata.put("environment", "development")
+
+s3Client.putObject(request -> 
+  request
+    .bucket(bucketName)
+    .key(file.getName())
+    .metadata(metadata)
+    .ifNoneMatch("*"), 
+  file.toPath());
+
+We first specify the bucket name and the File we wish to upload, then we pass them as arguments when calling the putObject() method.
+
+To store additional information about the object, we specify a few custom metadata using the metadata() method. These are key-value pairs that get linked to our object. Storing metadata is optional but can be useful in categorizing and managing objects based on application-specific attributes.
+
+By default, if an object with the same key already exists within the bucket, the PUT object operation overrides the existing content. Recently, Amazon S3 added support for conditional writes that helps prevent this. We use the ifNoneMatch() with * as the value in order to achieve this. If content overriding is expected, we can remove this line.
+5.2. Downloading Objects
+
+Just as we uploaded objects, we can also download them from our S3 bucket. Let’s see how:
+
+String key = "baeldung-logo.png";
+Path downloadPath = Paths.get("path-to-save-file");
+
+s3Client.getObject(request ->
+  request
+    .bucket(bucketName)
+    .key(key),
+  ResponseTransformer.toFile(downloadPath));
+
+Here, we specify the key of the object we want to download and the path where we want to save the downloaded file. We call the getObject() method using these parameters and then use ResponseTransformer.toFile() to save the object directly to a file at the specified path.
+5.3. Listing Objects
+
+When working with S3 buckets, we often need to list the objects stored in them.
+
+We’ve detailed the process of listing objects in an S3 bucket in a previous article.
+5.4. Copying, Renaming, and Moving Objects
+
+We also have the ability to copy an existing object in our S3 bucket to a new destination. Let’s take a look at how we can achieve this:
+
+String bucketName = "baeldung-bucket";
+s3Client.copyObject(request -> 
+  request
+    .sourceBucket(sourceBucketName)
+    .sourceKey(sourceKey)
+    .destinationBucket(destinationBucketName)
+    .destinationKey(destinationKey));
+
+We call the copyObject() method and specify the source bucket and key, along with the destination bucket and key. If the source and destination buckets are the same, this call will effectively rename our object.
+
+Similarly, to move an object from one bucket to another, we’ll specify different source and destination buckets, along with the respective keys.
+
+However, it’s important to note that the copyObject() method doesn’t automatically delete the original source object. To complete the renaming or moving process, after successful copying, we need to explicitly delete the source object, which we’ll cover in the next section.
+5.5. Deleting Objects
+
+Finally, let’s see how we can delete objects from our S3 bucket:
+
+String bucketName = "baeldung-bucket";
+String objectKey = "baeldung-logo.png";
+s3Client.deleteObject(request -> 
+  request
+    .bucket(bucketName)
+    .key(objectKey));
+
+We simply specify the bucket name and object key when calling the deleteObject() method.
+
+The S3Client also allows us to delete multiple objects from our S3 bucket using a single request:
+
+String bucketName = "baeldung-bucket";
+List<String> objectKeys = List.of("baeldung-logo.png", "baeldung-banner.png");
+List<ObjectIdentifier> objectsToDelete = objectKeys
+  .stream()
+  .map(key -> ObjectIdentifier
+    .builder()
+    .key(key)
+    .build())
+  .toList();
+
+s3Client.deleteObjects(request -> 
+  request
+    .bucket(bucketName)
+    .delete(deleteRequest -> 
+      deleteRequest
+        .objects(objectsToDelete)));
+
+Here, we create a list of ObjectIdentifiers for the objects we want to delete from our S3 bucket by specifying their keys. We then pass this list to the deleteObjects() method to delete them all in one go. This is more efficient than deleting each object individually.
+6. IAM Permissions
+
+Finally, for our application to function, we’ll need to configure some permissions for the IAM user we’ve configured in our application:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CreateBucketPermission",
+            "Effect": "Allow",
+            "Action": "s3:CreateBucket",
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "HeadBucketPermission",
+            "Effect": "Allow",
+            "Action": "s3:HeadBucket",
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "ListBucketsPermission",
+            "Effect": "Allow",
+            "Action": "s3:ListAllMyBuckets",
+            "Resource": "*"
+        },
+        {
+            "Sid": "DeleteBucketPermission",
+            "Effect": "Allow",
+            "Action": "s3:DeleteBucket",
+            "Resource": "arn:aws:s3:::*"
+        },
+        {
+            "Sid": "PutObjectPermission",
+            "Effect": "Allow",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::bucket-name/*"
+        },
+        {
+            "Sid": "GetObjectPermission",
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::bucket-name/*"
+        },
+        {
+            "Sid": "CopyObjectPermission",
+            "Effect": "Allow",
+            "Action": "s3:CopyObject",
+            "Resource": "arn:aws:s3:::bucket-name/*"
+        },
+        {
+            "Sid": "DeleteObjectPermission",
+            "Effect": "Allow",
+            "Action": "s3:DeleteObject",
+            "Resource": "arn:aws:s3:::bucket-name/*"
+        }
+    ]
+}
+
+The statements in our above IAM policy are in the order in which they appeared in the tutorial.
+
+It’s important to note that we should remove statements for actions we don’t intend to perform in our Java application. This helps us conform to the least privilege principle, granting only the necessary permissions required by our application to function correctly.
+7. Conclusion
+
+In this article, we’ve explored using Amazon S3 as an object storage solution in our Java application.
+
+We started by creating a client connection to interact with the S3 service. Then, we looked at how to manage buckets as well as perform CRUD operations on objects in an S3 bucket.
+
+Finally, we discussed the necessary IAM permissions that our application needs to run.
+
+As always, all the code examples used in this article are available over on GitHub.
