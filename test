@@ -27,3 +27,9 @@ assertThat(responseEntity.getStatusCode(), is(equalTo(HttpStatus.OK)));
 
 implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.4.1'
 implementation("io.awspring.cloud:spring-cloud-aws-starter-s3:3.3.0")
+spring:
+  cloud:
+    aws:
+      credentials:
+        access-key: your-access-key
+        secret-key: your-secret-key
