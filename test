@@ -40,3 +40,5 @@ Secret Key: bfWU9gk+PXGImK+aimEnyoIavucWLsd+bEpCNLvQ
 Bucket Name: BDC_DM_STG_MINING
 
 https://github.com/Java-Techie-jt/s3-file-storage-example
+
+implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
