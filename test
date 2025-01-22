@@ -42,3 +42,7 @@ Bucket Name: BDC_DM_STG_MINING
 https://github.com/Java-Techie-jt/s3-file-storage-example
 
 implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
+
+// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
+import group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: '2024.0.0', ext: 'pom'
+
