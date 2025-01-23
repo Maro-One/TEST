@@ -59,3 +59,4 @@ implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter',
 
 There is no EC2 meta data available, because the application is not running in the EC2 environment. Region detection is only possible if the application is running on a EC2 instance
 	at org.springframework.util.Assert.state(Assert.java:73)
+Caused by: com.amazonaws.SdkClientException: Unable to find a region via the region provider chain. Must provide an explicit region in the builder or setup environment to supply a region.
