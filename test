@@ -64,3 +64,15 @@ Caused by: com.amazonaws.SdkClientException: Unable to find a region via the reg
 // https://mvnrepository.com/artifact/software.amazon.awssdk/s3
 testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.3'
 
+String accessKey = "<AWS Access Key>";
+String secretKey = "<AWS Secret Key>";
+AwsCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
+
+Then, let’s create an instance of the S3Client class against an AWS region:
+
+String regionName = "<AWS Region>";
+S3Client s3Client = S3Client
+  .builder()
+  .region(Region.of(regionName))
+  .credentialsProvider(StaticCredentialsProvider.create(credentials))
+  .build();
