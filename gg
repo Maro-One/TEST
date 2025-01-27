@@ -13,3 +13,7 @@ cloud:
             static: ap-south-1
         stack:
             auto: false
+S3_ACCESSKEY=user_dm_stg_manufact
+S3_SECRETKEY=rxMN+evKLK0RGK09uB8S3/Jcr1Tl433kL+oV8S3j
+S3_ENDPOINT=https://bdcloudstorage.ocpgroup.ma
+S3_BUCKETNAME=BDC_DM_STG_MANUFACT
