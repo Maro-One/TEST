@@ -36,4 +36,8 @@ dailymeeting_sbumining
 dmUserSbum
  
 DmU5ser@2%%4
+
+// https://mvnrepository.com/artifact/software.amazon.awssdk/s3
+testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.10'
+
  
