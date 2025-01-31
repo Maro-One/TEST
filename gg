@@ -47,4 +47,15 @@ implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.780'
 
 // https://mvnrepository.com/artifact/software.amazon.awssdk/s3
 testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.10'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/protocol-core
+implementation group: 'software.amazon.awssdk', name: 'protocol-core', version: '2.30.10'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/http-auth-aws
+implementation group: 'software.amazon.awssdk', name: 'http-auth-aws', version: '2.30.10'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/auth
+implementation group: 'software.amazon.awssdk', name: 'auth', version: '2.30.10'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core
+implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: '2.30.10'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core
+implementation group: 'software.amazon.awssdk', name: 'aws-core', version: '2.30.10'
+
 
