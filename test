@@ -1,35 +1,3 @@
-import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.transfer.s3.S3TransferManager;
-import software.amazon.awssdk.transfer.s3.Upload;
-import software.amazon.awssdk.transfer.s3.model.UploadObjectRequest;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-public class S3UploadFromUrlTransferManager {
-    public static void main(String[] args) {
-        String bucketName = "your-bucket-name";
-        String key = "uploaded-file.jpg";
-        String fileUrl = "https://example.com/image.jpg"; // URL of the file
-
-        // Initialize S3 client
-        S3Client s3 = S3Client.builder()
-                .region(Region.US_EAST_1) // Set your region
-                .credentialsProvider(ProfileCredentialsProvider.create())
-                .build();
-
-        // Initialize S3 Transfer Manager
-        S3TransferManager transferManager = S3TransferManager.builder()
-                .s3Client(s3)
-                .build();
-
-        try {
-            // Open URL stream
             URL url = new URL(fileUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -37,25 +5,12 @@ public class S3UploadFromUrlTransferManager {
             try (InputStream inputStream = connection.getInputStream()) {
                 long contentLength = connection.getContentLengthLong();
 
-                // Create UploadObjectRequest
-                UploadObjectRequest uploadRequest = UploadObjectRequest.builder()
-                        .putObjectRequest(PutObjectRequest.builder()
-                                .bucket(bucketName)
-                                .key(key)
-                                .build())
-                        .requestBody(RequestBody.fromInputStream(inputStream, contentLength))
+                // Upload to S3
+                PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                        .bucket(bucketName)
+                        .key(key)
                         .build();
 
-                // Upload the object
-                Upload upload = transferManager.uploadObject(uploadRequest);
-                upload.completionFuture().join(); // Wait for completion
+                s3.putObject(putObjectRequest, RequestBody.fromInputStream(inputStream, contentLength));
 
-                System.out.println("File uploaded successfully from URL!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            transferManager.close();
-        }
-    }
-}
+                System.out.println("File uploaded successfully from URL!")
