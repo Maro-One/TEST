@@ -1,78 +1,61 @@
-4. Using RestTemplateCustomizer
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.transfer.s3.S3TransferManager;
+import software.amazon.awssdk.transfer.s3.Upload;
+import software.amazon.awssdk.transfer.s3.model.UploadObjectRequest;
 
-Another approach is to use a RestTemplateCustomizer with RestTemplateBuilder to build a customized RestTemplate.
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-Let’s start defining a ProxyCustomizer:
+public class S3UploadFromUrlTransferManager {
+    public static void main(String[] args) {
+        String bucketName = "your-bucket-name";
+        String key = "uploaded-file.jpg";
+        String fileUrl = "https://example.com/image.jpg"; // URL of the file
 
-class ProxyCustomizer implements RestTemplateCustomizer {
+        // Initialize S3 client
+        S3Client s3 = S3Client.builder()
+                .region(Region.US_EAST_1) // Set your region
+                .credentialsProvider(ProfileCredentialsProvider.create())
+                .build();
 
-    @Override
-    public void customize(RestTemplate restTemplate) {
-        HttpHost proxy = new HttpHost(PROXY_SERVER_HOST, PROXY_SERVER_PORT);
-        HttpClient httpClient = HttpClientBuilder.create()
-            .setRoutePlanner(new DefaultProxyRoutePlanner(proxy))
-            .build();
-        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient));
+        // Initialize S3 Transfer Manager
+        S3TransferManager transferManager = S3TransferManager.builder()
+                .s3Client(s3)
+                .build();
+
+        try {
+            // Open URL stream
+            URL url = new URL(fileUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            try (InputStream inputStream = connection.getInputStream()) {
+                long contentLength = connection.getContentLengthLong();
+
+                // Create UploadObjectRequest
+                UploadObjectRequest uploadRequest = UploadObjectRequest.builder()
+                        .putObjectRequest(PutObjectRequest.builder()
+                                .bucket(bucketName)
+                                .key(key)
+                                .build())
+                        .requestBody(RequestBody.fromInputStream(inputStream, contentLength))
+                        .build();
+
+                // Upload the object
+                Upload upload = transferManager.uploadObject(uploadRequest);
+                upload.completionFuture().join(); // Wait for completion
+
+                System.out.println("File uploaded successfully from URL!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            transferManager.close();
+        }
     }
 }
-
-After that, we build our customized RestTemplate:
-
-RestTemplate restTemplate = new RestTemplateBuilder(new ProxyCustomizer()).build();
-
-And finally, we use the RestTemplate to make requests that pass first through a proxy:
-
-ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://httpbin.org/get", String.class);
-assertThat(responseEntity.getStatusCode(), is(equalTo(HttpStatus.OK)));
-
-implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.4.1'
-implementation("io.awspring.cloud:spring-cloud-aws-starter-s3:3.3.0")
-spring:
-  cloud:
-    aws:
-      credentials:
-        access-key: your-access-key
-        secret-key: your-secret-key
-
-Endpoint: https://bdcloudstorage.ocpgroup.ma
-Key Id: user_dm_stg_mining
-Secret Key: bfWU9gk+PXGImK+aimEnyoIavucWLsd+bEpCNLvQ
-Bucket Name: BDC_DM_STG_MINING
-
-https://github.com/Java-Techie-jt/s3-file-storage-example
-
-implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.6.RELEASE'
-
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
-import group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: '2024.0.0', ext: 'pom'
-
-ext {
-    set('springCloudVersion', "2022.0.4") // 2022.0.4 is the latest one.
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter', version: '4.2.0'
-
-There is no EC2 meta data available, because the application is not running in the EC2 environment. Region detection is only possible if the application is running on a EC2 instance
-	at org.springframework.util.Assert.state(Assert.java:73)
-Caused by: com.amazonaws.SdkClientException: Unable to find a region via the region provider chain. Must provide an explicit region in the builder or setup environment to supply a region.
-
-// https://mvnrepository.com/artifact/software.amazon.awssdk/s3
-testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.3'
-
-String accessKey = "<AWS Access Key>";
-String secretKey = "<AWS Secret Key>";
-AwsCredentials credentials = AwsBasicCredentials.create(accessKey, secretKey);
-
-Then, let’s create an instance of the S3Client class against an AWS region:
-
-String regionName = "<AWS Region>";
-S3Client s3Client = S3Client
-  .builder()
-  .region(Region.of(regionName))
-  .credentialsProvider(StaticCredentialsProvider.create(credentials))
-  .build();
