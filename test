@@ -14,3 +14,42 @@
                 s3.putObject(putObjectRequest, RequestBody.fromInputStream(inputStream, contentLength));
 
                 System.out.println("File uploaded successfully from URL!")
+
+import io.minio.*;
+import io.minio.errors.*;
+
+import java.io.InputStream;
+
+public class MinioGetObject {
+    public static void main(String[] args) {
+        try {
+            MinioClient minioClient = MinioClient.builder()
+                    .endpoint("https://your-minio-server.com")
+                    .credentials("your-access-key", "your-secret-key")
+                    .build();
+
+            String bucketName = "my-bucket";
+            String objectName = "non-existing-file.txt"; // This file does NOT exist
+
+            // Try to get the object
+            InputStream stream = minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .build()
+            );
+
+            System.out.println("File retrieved successfully!");
+            stream.close();
+
+        } catch (ErrorResponseException e) {
+            if (e.errorResponse().code().equals("NoSuchKey")) {
+                System.out.println("Error: Object not found - " + e.errorResponse().message());
+            } else {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
