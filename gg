@@ -68,3 +68,10 @@ implementation group: 'software.amazon.awssdk', name: 'aws-core', version: '2.30
                     })
                     .forEach(item -> System.out.println("Object: " + item.objectName()));
 
+InputStream inputStream = minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectKey)
+                            .build()
+            );
+
