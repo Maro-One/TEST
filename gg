@@ -75,3 +75,4 @@ InputStream inputStream = minioClient.getObject(
                             .build()
             );
 
+            String decodedObjectName = URLDecoder.decode(encodedObjectName, StandardCharsets.UTF_8);
