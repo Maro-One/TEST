@@ -58,4 +58,13 @@ implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: '2.30
 // https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core
 implementation group: 'software.amazon.awssdk', name: 'aws-core', version: '2.30.10'
 
+            StreamSupport.stream(objectList.spliterator(), false)
+                    .map(result -> {
+                        try {
+                            return result.get();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .forEach(item -> System.out.println("Object: " + item.objectName()));
 
