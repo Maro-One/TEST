@@ -76,3 +76,15 @@ InputStream inputStream = minioClient.getObject(
             );
 
             String decodedObjectName = URLDecoder.decode(encodedObjectName, StandardCharsets.UTF_8);
+
+Iterable<Result> results = getResults(); // Replace with your Iterable source
+
+        // Get an Iterator from the Iterable
+        Iterator<Result> iterator = results.iterator();
+
+        // Loop through using hasNext() and next() methods
+        while (iterator.hasNext()) {
+            Result result = iterator.next(); // Get the next element in the iteration
+            // Process each Result object here
+            System.out.println(result.toString()); // Replace with your processing logic
+        }
