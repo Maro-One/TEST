@@ -1,90 +1,35 @@
 oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1JJbTZNaXZLdzhHNVVLSklKbDAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJwcm94eS1pbnRlZ3JhdGlvbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXRva2VuLWhyYm5yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InZpZXciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJhYzhkNGE5OC05MmU2LTRlYjItOWUyMC1lZmNmNGE2NWEwNTMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6cHJveHktaW50ZWdyYXRpb246dmlldyJ9.b4HzsqnqyCD8JlyNZKzUqxWkHMLHKYwGHIXRzYQ_xjWJ-yGoSHid6vdlc8E2VMXPXEQYxWe9m2KRtxbaWBn6bRxPAMAbEiVG4B1DifRJi3BXFFI6-WdRQfci6JQx2f6jRQRYWA6SQyXUSPH92IwFDwQg5FlWKHRJPYdlLa_E11AKUE4gGNXwW22OWUM7ykhGv8WA82RtDkp1YwyzDFkkZIEhM3MjT_8rxdDqTeuUgvVMkSXDS_4IyBHTM5XYwFUPnL6cilwgV5O9KDk8yGkMcm5CTxp9g6TBzp0EsO8nhJ0M8-uLSTjQ1SZSkHHkUgyb0o6akwicHM_pE-UzJhq_m5gOE6cssB50isAL4f4Si3PvK3gqFCgHUvHCx9l1sG5h6YzC50dUb5eGQQDXEyTKIfnYZqVtyAwAs420RvBInZQa6k1ljBA8RZgw9SvwFAIbN7VWcrXxBWnqs7O2de6nWJSaJ-z2v0zf_jHvFfuy0-u90RCao_f-ie9Pwmg-NMEdV5EEIt8OJWNt0QpijKXWOn4zbAq9A2S7YLyRHatwBZ8FWgE51MA4RmLM6cq8anjU5QNK3jZGHNnjERCqwBpDFFJJjs1k8vy_VHLw7GbShDeG-J2WYQZBrOnuAo9LtvMrOjGkXHY1v3JGKjdLzBYL68hC5isGe5osBlbhJia6wck --server=https://api.techlab.ocpgroup.ma:6443
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
-spring:
-    autoconfigure:
-        exclude:
-            - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
-            - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
-            - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
 
-cloud:
-    aws:
-        region:
-            static: ap-south-1
-        stack:
-            auto: false
-S3_ACCESSKEY=user_dm_stg_manufact
-S3_SECRETKEY=rxMN+evKLK0RGK09uB8S3/Jcr1Tl433kL+oV8S3j
-S3_ENDPOINT=https://bdcloudstorage.ocpgroup.ma
-S3_BUCKETNAME=BDC_DM_STG_MANUFACT
 
-https://git.digilab.ocpgroup.ma/lotus/lotus-services/-/merge_requests/1072
-https://git.digilab.ocpgroup.ma/ecosystemplateform/ecosystem-portal/-/merge_requests/398
-https://git.digilab.ocpgroup.ma/integration/procurement-apis/-/merge_requests/1178
+simport org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.14'
+import java.io.IOException;
 
-implementation group: 'joda-time', name: 'joda-time', version: '2.13.0'
+@RestController
+@RequestMapping("/images")
+public class ImageController {
 
-https://ddei5-0-ctp.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2ffastfile.ocpgroup.ma%2fdownload%2fs48bkydnhqyragrispc6o7v35t9odw6l3n0fupxpae6b5gteutvfek0z9ysde8pqtfqo5bg2cmhecf3jhzv27u51f4lhgg86pcasu46iqeobiyb0bukh1pc1p01u0u8d&umid=42B5EB1C-2CDA-ED06-9F04-483B982EBAC0&auth=5307f442576035634cf5e89b9ab5c8b2ebe65e73-21f446bab065c90005654f4be171fc97cfaf5202
-417251
-303685
-https://ddei5-0-ctp.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2ffastfile.ocpgroup.ma%2fdownload%2fa0z3xng89v1kisau73yyj2edxjqx6u6jhoau7ypmerr70cebao7ex4nr8boaqtnfqr8v6px26r84pop4twiw7hk7f5dlwnvw8ylmuw688w4wlbugjn5wfxf2prli3dtl&umid=60925488-2CE8-4C06-8FC3-C53F135A525B&auth=520ccf831d5834d4305f730a6d98145484532275-5c34216f1012715866ea810ecf581e9186a34ea7
-https://console-openshift-console.apps.techlab.ocpgroup.ma/
-dailymeeting_sbumining
- 
-dmUserSbum
- 
-DmU5ser@2%%4
+    // Endpoint to serve an image
+    @GetMapping(value = "/my-image", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<Resource> getImage() throws IOException {
+        // Load the image from the classpath (src/main/resources)
+        Resource imageResource = new ClassPathResource("static/images/my-image.jpg");
 
-// https://mvnrepository.com/artifact/software.amazon.awssdk/s3
-testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.10'
-
- // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-core
-implementation group: 'com.amazonaws', name: 'aws-java-sdk-core', version: '1.12.780'
-// https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk
-implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.780'
-
-// https://mvnrepository.com/artifact/software.amazon.awssdk/s3
-testImplementation group: 'software.amazon.awssdk', name: 's3', version: '2.30.10'
-// https://mvnrepository.com/artifact/software.amazon.awssdk/protocol-core
-implementation group: 'software.amazon.awssdk', name: 'protocol-core', version: '2.30.10'
-// https://mvnrepository.com/artifact/software.amazon.awssdk/http-auth-aws
-implementation group: 'software.amazon.awssdk', name: 'http-auth-aws', version: '2.30.10'
-// https://mvnrepository.com/artifact/software.amazon.awssdk/auth
-implementation group: 'software.amazon.awssdk', name: 'auth', version: '2.30.10'
-// https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core
-implementation group: 'software.amazon.awssdk', name: 'sdk-core', version: '2.30.10'
-// https://mvnrepository.com/artifact/software.amazon.awssdk/aws-core
-implementation group: 'software.amazon.awssdk', name: 'aws-core', version: '2.30.10'
-
-            StreamSupport.stream(objectList.spliterator(), false)
-                    .map(result -> {
-                        try {
-                            return result.get();
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    })
-                    .forEach(item -> System.out.println("Object: " + item.objectName()));
-
-InputStream inputStream = minioClient.getObject(
-                    GetObjectArgs.builder()
-                            .bucket(bucketName)
-                            .object(objectKey)
-                            .build()
-            );
-
-            String decodedObjectName = URLDecoder.decode(encodedObjectName, StandardCharsets.UTF_8);
-
-Iterable<Result> results = getResults(); // Replace with your Iterable source
-
-        // Get an Iterator from the Iterable
-        Iterator<Result> iterator = results.iterator();
-
-        // Loop through using hasNext() and next() methods
-        while (iterator.hasNext()) {
-            Result result = iterator.next(); // Get the next element in the iteration
-            // Process each Result object here
-            System.out.println(result.toString()); // Replace with your processing logic
+        // Check if the image exists
+        if (!imageResource.exists()) {
+            return ResponseEntity.notFound().build();
         }
+
+        // Return the image with the appropriate content type
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(imageResource);
+    }
+}
