@@ -3,3 +3,25 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 http://10.21.25.25:31559/api/proxy/workcap/v2/documents/
  
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus
+public class CustomHttpException extends RuntimeException {
+    private final HttpStatus status;
+    private final String responseBody;
+
+    public CustomHttpException(HttpStatus status, String responseBody) {
+        super("HTTP Error: " + status);
+        this.status = status;
+        this.responseBody = responseBody;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public String getResponseBody() {
+        return responseBody;
+    }
+}
