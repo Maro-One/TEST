@@ -7,3 +7,8 @@ byte[] imageBytes = inputStream.readAllBytes();
 
             // Encode byte array to Base64 string
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+
+            // Encode to Base64 URL-safe format
+            String base64UrlSafe = Base64.getUrlEncoder().withoutPadding().encodeToString(imageBytes);
+
