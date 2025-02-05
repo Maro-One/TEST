@@ -42,13 +42,12 @@ server.error.include-binding-errors=always
         
         throw new CustomRestException(response.getRawStatusCode(), responseBody);
     }
-
 public class CustomRestException extends RuntimeException {
     private final int statusCode;
     private final String responseBody;
 
     public CustomRestException(int statusCode, String responseBody) {
-        super("HTTP Status: " + statusCode + " - " + responseBody);
+        super("HTTP Status: " + statusCode + " - " + responseBody); // Call superclass constructor
         this.statusCode = statusCode;
         this.responseBody = responseBody;
     }
@@ -61,3 +60,4 @@ public class CustomRestException extends RuntimeException {
         return responseBody;
     }
 }
+
