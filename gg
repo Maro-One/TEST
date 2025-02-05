@@ -29,3 +29,16 @@ const ProxyFetcher = () => {
 };
 
 export default ProxyFetcher;
+
+import ProxyFetcher from "./components/ProxyFetcher";
+
+function App() {
+  return (
+    <div>
+      <h1>React Proxy Example</h1>
+      <ProxyFetcher />
+    </div>
+  );
+}
+
+export default App;
