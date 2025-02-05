@@ -3,12 +3,13 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
 
-byte[] imageBytes = inputStream.readAllBytes();
+import java.io.ByteArrayOutputStream;
+import java.util.zip.GZIPOutputStream;
 
-            // Encode byte array to Base64 string
-            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
-
-            // Encode to Base64 URL-safe format
-            String base64UrlSafe = Base64.getUrlEncoder().withoutPadding().encodeToString(imageBytes);
-
+public static String compressBase64(String base64) throws Exception {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    try (GZIPOutputStream gzipOut = new GZIPOutputStream(baos)) {
+        gzipOut.write(base64.getBytes());
+    }
+    return Base64.getUrlEncoder().withoutPadding().encodeToString(baos.toByteArray());
+}
