@@ -28,3 +28,36 @@ public class CustomHttpException extends RuntimeException {
 
 server.error.include-message=always
 server.error.include-binding-errors=always
+
+    @Override
+    public boolean hasError(ClientHttpResponse response) throws IOException {
+        return response.getStatusCode().isError();
+    }
+
+    @Override
+    public void handleError(ClientHttpResponse response) throws IOException {
+        String responseBody = new BufferedReader(new InputStreamReader(response.getBody(), StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+        
+        throw new CustomRestException(response.getRawStatusCode(), responseBody);
+    }
+
+public class CustomRestException extends RuntimeException {
+    private final int statusCode;
+    private final String responseBody;
+
+    public CustomRestException(int statusCode, String responseBody) {
+        super("HTTP Status: " + statusCode + " - " + responseBody);
+        this.statusCode = statusCode;
+        this.responseBody = responseBody;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public String getResponseBody() {
+        return responseBody;
+    }
+}
