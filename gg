@@ -2,3 +2,8 @@ oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1J
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
+
+byte[] imageBytes = inputStream.readAllBytes();
+
+            // Encode byte array to Base64 string
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
