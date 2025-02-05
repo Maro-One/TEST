@@ -3,13 +3,29 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
 
-import java.io.ByteArrayOutputStream;
-import java.util.zip.GZIPOutputStream;
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
-public static String compressBase64(String base64) throws Exception {
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    try (GZIPOutputStream gzipOut = new GZIPOutputStream(baos)) {
-        gzipOut.write(base64.getBytes());
+const ProxyFetcher = () => {
+  const [searchParams] = useSearchParams();
+  const targetUrl = searchParams.get("url");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (targetUrl) {
+      fetch(targetUrl)
+        .then((res) => res.text()) // Get response as text (or .json() if API)
+        .then((text) => setData(text))
+        .catch((err) => console.error("Error fetching:", err));
     }
-    return Base64.getUrlEncoder().withoutPadding().encodeToString(baos.toByteArray());
-}
+  }, [targetUrl]);
+
+  return (
+    <div>
+      <h2>Proxy Fetcher</h2>
+      {data ? <pre>{data}</pre> : <p>Loading...</p>}
+    </div>
+  );
+};
+
+export default ProxyFetcher;
