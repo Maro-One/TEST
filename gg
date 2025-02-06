@@ -3,56 +3,32 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
 
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const ProxyFetcher = () => {
-  const [searchParams] = useSearchParams();
-  const targetUrl = searchParams.get("url");
-  const [data, setData] = useState(null);
+const RedirectPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Parse the query parameters
+    const queryParams = new URLSearchParams(location.search);
+    const targetUrl = queryParams.get('url');
+
     if (targetUrl) {
-      fetch(targetUrl)
-        .then((res) => res.text()) // Get response as text (or .json() if API)
-        .then((text) => setData(text))
-        .catch((err) => console.error("Error fetching:", err));
+      // Redirect to the target URL
+      window.location.href = targetUrl;
+    } else {
+      // Handle case where no URL is provided
+      navigate('/'); // Redirect to home or a fallback page
     }
-  }, [targetUrl]);
+  }, [location, navigate]);
 
   return (
     <div>
-      <h2>Proxy Fetcher</h2>
-      {data ? <pre>{data}</pre> : <p>Loading...</p>}
+      <p>Redirecting...</p>
     </div>
   );
 };
 
-export default ProxyFetcher;
-
-import ProxyFetcher from "./components/ProxyFetcher";
-
-function App() {
-  return (
-    <div>
-      <h1>React Proxy Example</h1>
-      <ProxyFetcher />
-    </div>
-  );
-}
-
-export default App;
-
-import ProxyFetcher from "../components/ProxyFetcher";
-
-const ProxyPage = () => {
-  return (
-    <div>
-      <h1>Proxy Page</h1>
-      <ProxyFetcher />
-    </div>
-  );
-};
-
-export default ProxyPage;
-
+export default RedirectPage;
