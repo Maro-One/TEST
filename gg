@@ -2,51 +2,80 @@ oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1J
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
 
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import java.io.InputStream;
+import java.net.URL;
+import java.time.Duration;
 
-const RedirectPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+@Service
+public class S3Service {
+    
+    private final String bucketName = "your-bucket-name";
+    private final S3Client s3Client;
+    private final S3Presigner presigner;
 
-  useEffect(() => {
-    // Parse the query parameters
-    const queryParams = new URLSearchParams(location.search);
-    const targetUrl = queryParams.get('url');
+    public S3Service() {
+        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
+            "your-access-key", "your-secret-key"
+        );
 
-    if (targetUrl) {
-      // Redirect to the target URL
-      window.location.href = targetUrl;
-    } else {
-      // Handle case where no URL is provided
-      navigate('/'); // Redirect to home or a fallback page
+        this.s3Client = S3Client.builder()
+                .region(Region.US_EAST_1)  // Change your region
+                .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
+                .build();
+
+        this.presigner = S3Presigner.builder()
+                .region(Region.US_EAST_1)
+                .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
+                .build();
     }
-  }, [location, navigate]);
 
-  return (
-    <div>
-      <p>Redirecting...</p>
-    </div>
-  );
-};
+    // Method to get a presigned URL for an S3 object
+    public URL generatePresignedUrl(String filename) {
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(bucketName)
+                .key(filename)
+                .build();
 
-export default RedirectPage;
+        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(Duration.ofMinutes(5)) // URL valid for 5 minutes
+                .objectRequest(getObjectRequest)
+                .build();
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RedirectPage from './RedirectPage';
-import HomePage from './HomePage'; // Your home page or other components
+        return presigner.presignGetObject(presignRequest).url();
+    }
 
-const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/redirect" element={<RedirectPage />} />
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </Router>
-  );
-};
+    // Method to fetch an image from S3 and stream it to frontend
+    public ResponseEntity<byte[]> getImage(String filename) {
+        try {
+            GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(filename)
+                    .build();
 
-export default App;
+            InputStream inputStream = s3Client.getObject(getObjectRequest);
+            byte[] imageBytes = inputStream.readAllBytes();
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG) // Adjust for PNG, GIF, etc.
+                    .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
+                    .header(HttpHeaders.PRAGMA, "no-cache")
+                    .header(HttpHeaders.EXPIRES, "0")
+                    .body(imageBytes);
+
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
