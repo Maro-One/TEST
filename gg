@@ -65,3 +65,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
+Manufacturing buckets :
+
+DailyMeetingManufacturingStg
+
+DailyMeetingManufacturingPreprod
+
+DailyMeetingManufacturingProd
+
+ 
+
+Mining buckets :
+
+DailyMeetingMiningStg
+
+DailyMeetingMiningPreprod
+
+DailyMeetingMiningProd
