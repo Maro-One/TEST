@@ -2,80 +2,61 @@ oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1J
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 
 keytool -importcert -file "C:\Users\AdnaneAMINE\Downloads\sts.ocpgroup.ma.crt" -keystore "C:\Program Files\Java\jdk1.8.0_281\jre\lib\security\cacerts" -alias cacert2-sts
+package com.example.demo.controller;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
-import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.GetObjectRequest;
-import software.amazon.awssdk.services.s3.presigner.S3Presigner;
-import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.InputStream;
-import java.net.URL;
-import java.time.Duration;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
-@Service
-public class S3Service {
-    
-    private final String bucketName = "your-bucket-name";
-    private final S3Client s3Client;
-    private final S3Presigner presigner;
+@RestController
+@RequestMapping("/download")
+public class ExcelDownloadController {
 
-    public S3Service() {
-        AwsBasicCredentials awsCreds = AwsBasicCredentials.create(
-            "your-access-key", "your-secret-key"
-        );
+    @GetMapping("/excel")
+    public ResponseEntity<byte[]> downloadExcel() {
+        try (Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Sample Data");
+            Row headerRow = sheet.createRow(0);
+            headerRow.createCell(0).setCellValue("ID");
+            headerRow.createCell(1).setCellValue("Name");
+            headerRow.createCell(2).setCellValue("Email");
 
-        this.s3Client = S3Client.builder()
-                .region(Region.US_EAST_1)  // Change your region
-                .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
-                .build();
+            // Sample Data
+            Object[][] data = {
+                {1, "John Doe", "john@example.com"},
+                {2, "Jane Smith", "jane@example.com"}
+            };
 
-        this.presigner = S3Presigner.builder()
-                .region(Region.US_EAST_1)
-                .credentialsProvider(StaticCredentialsProvider.create(awsCreds))
-                .build();
-    }
+            int rowNum = 1;
+            for (Object[] rowData : data) {
+                Row row = sheet.createRow(rowNum++);
+                for (int col = 0; col < rowData.length; col++) {
+                    row.createCell(col).setCellValue(rowData[col].toString());
+                }
+            }
 
-    // Method to get a presigned URL for an S3 object
-    public URL generatePresignedUrl(String filename) {
-        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                .bucket(bucketName)
-                .key(filename)
-                .build();
+            // Convert Workbook to ByteArray
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            workbook.write(outputStream);
+            byte[] excelBytes = outputStream.toByteArray();
 
-        GetObjectPresignRequest presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(Duration.ofMinutes(5)) // URL valid for 5 minutes
-                .objectRequest(getObjectRequest)
-                .build();
+            // Set headers for download
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "attachment; filename=sample.xlsx");
+            headers.add("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        return presigner.presignGetObject(presignRequest).url();
-    }
-
-    // Method to fetch an image from S3 and stream it to frontend
-    public ResponseEntity<byte[]> getImage(String filename) {
-        try {
-            GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(filename)
-                    .build();
-
-            InputStream inputStream = s3Client.getObject(getObjectRequest);
-            byte[] imageBytes = inputStream.readAllBytes();
-
-            return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG) // Adjust for PNG, GIF, etc.
-                    .header(HttpHeaders.CACHE_CONTROL, "no-cache, no-store, must-revalidate")
-                    .header(HttpHeaders.PRAGMA, "no-cache")
-                    .header(HttpHeaders.EXPIRES, "0")
-                    .body(imageBytes);
-
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
+
