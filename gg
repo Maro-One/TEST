@@ -29,3 +29,7 @@ S3_ACCESSKEY=user_dm_stg_manufact
 S3_SECRETKEY=rxMN+evKLK0RGK09uB8S3/Jcr1Tl433kL+oV8S3j
 S3_ENDPOINT=https://bdcloudstorage.ocpgroup.ma
 S3_BUCKETNAME=BDC_DM_STG_MANUFACT
+
+Key Id: user_dm_prep_mining
+Secret Key: bSs2KDw3EdfUPRckdj1e6bRLrivssDz30npFc7FG
+Bucket Name: BDC_DM_PREP_MANUFACT
