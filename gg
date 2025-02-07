@@ -18,3 +18,14 @@ dailymeetingminingstg
 dailymeetingminingpreprod
 
 dailymeetingminingprod
+
+
+S3_ACCESSKEY=user_dm_stg_mining
+S3_SECRETKEY=bfWU9gk+PXGImK+aimEnyoIavucWLsd+bEpCNLvQ
+S3_ENDPOINT=https://bdcloudstorage.ocpgroup.ma
+S3_BUCKETNAME=BDC_DM_STG_MINING
+
+S3_ACCESSKEY=user_dm_stg_manufact
+S3_SECRETKEY=rxMN+evKLK0RGK09uB8S3/Jcr1Tl433kL+oV8S3j
+S3_ENDPOINT=https://bdcloudstorage.ocpgroup.ma
+S3_BUCKETNAME=BDC_DM_STG_MANUFACT
