@@ -1,2 +1,53 @@
-https://fastfile.ocpgroup.ma/download/b8d2q3acuvgsvyg36ones5wu34zebonhwp9cde5pk42ddiyy3xoui3vp6z60zj8i0plx0eosh8hpedh795r08d5cinpstwbmmm5m4ribc4un0c7bxqow0lt2srj1jky7
-643717
+import org.apache.hc.client5.http.config.ConnectionConfig;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.util.Timeout;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.ProxySelector;
+import java.net.URI;
+import java.util.Collections;
+
+@Configuration
+public class RestTemplateConfig {
+
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        // Proxy settings
+        String proxyHost = "proxy.example.com";
+        int proxyPort = 8080;
+
+        // Create a ProxySelector
+        ProxySelector proxySelector = new ProxySelector() {
+            @Override
+            public java.util.List<Proxy> select(URI uri) {
+                return Collections.singletonList(new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort)));
+            }
+
+            @Override
+            public void connectFailed(URI uri, InetSocketAddress sa, java.io.IOException ioe) {
+                System.err.println("Proxy connection failed: " + ioe.getMessage());
+            }
+        };
+
+        // Configure HttpClient with proxy
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setProxy(proxySelector)
+                .setDefaultRequestConfig(RequestConfig.custom()
+                        .setConnectionRequestTimeout(Timeout.ofSeconds(10))
+                        .build())
+                .build();
+
+        // Use HttpComponentsClientHttpRequestFactory with RestTemplate
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
+        
+        return builder.requestFactory(() -> factory).build();
+    }
+}
