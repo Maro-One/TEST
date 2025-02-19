@@ -1,2 +1,16 @@
-https://git.digilab.ocpgroup.ma/integration/procurement-apis/-/merge_requests/1180
-bedeb9a57502add0b5222f224731e80e597071d2
+SELECT us.id, us.name, us.email, role.role_name, a.name as atelier_name, un.unite_name, u.name as usine_name FROM dailymeeting.user as us
+left join dailymeeting.assigned_role on us.id = dailymeeting.assigned_role.user_id
+left join dailymeeting.role as role on role.id = dailymeeting.assigned_role.role_id
+left join dailymeeting.affectation_user_atelier on us.id = dailymeeting.affectation_user_atelier.user_id
+left join dailymeeting.affectation_unite on us.id = dailymeeting.affectation_unite.user_id
+left join dailymeeting.usine as u on dailymeeting.affectation_user_atelier.usine_id = u.id
+left join dailymeeting.unite as un on dailymeeting.affectation_unite.unite_id = un.id
+left join dailymeeting.atelier as a on dailymeeting.affectation_user_atelier.atelier_id = a.id;
+
+SELECT us.id, us.name, us.email, role.role_name, un.unite_name, u.name as usine_name FROM dailymeeting.user as us
+left join dailymeeting.assigned_role on us.id = dailymeeting.assigned_role.user_id
+left join dailymeeting.role as role on role.id = dailymeeting.assigned_role.role_id
+left join dailymeeting.affectation_user_usine on us.id = dailymeeting.affectation_user_usine.user_id
+left join dailymeeting.affectation_unite on us.id = dailymeeting.affectation_unite.user_id
+left join dailymeeting.usine as u on dailymeeting.affectation_user_usine.usine_id = u.id
+left join dailymeeting.unite as un on dailymeeting.affectation_unite.unite_id = un.id;
