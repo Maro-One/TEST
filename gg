@@ -18,3 +18,4 @@ CLIENT_ID: '66075e27-8f30-429b-b1ac-342f0f81832f',
       REDIRECT_URI: 'https://daily-meeting-stg.digilab.ocpgroup.ma'
 
 https://sts.ocpgroup.ma/adfs/oauth2/authorize?response_type=id_token&client_id=66075e27-8f30-429b-b1ac-342f0f81832f&redirect_uri=https%3A%2F%2Fdaily-meeting-stg.digilab.ocpgroup.ma&state=410ca908-85ce-4e09-8212-5c95cb8bd196&client-request-id=be21c419-4a39-4f0f-a21c-72fbd63971e8&x-client-SKU=Js&x-client-Ver=1.0.18&nonce=a60c6b99-0ad3-4388-b2e9-39bb44705483
+https://git.digilab.ocpgroup.ma/ecosystemplateform/ecosystem-portal/-/merge_requests/400
