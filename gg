@@ -5,3 +5,5 @@ java.lang.IllegalStateException
         Caused by: org.springframework.beans.factory.BeanCreationException
             Caused by: javax.persistence.PersistenceException
                 Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [affectation_kpi]
