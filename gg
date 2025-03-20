@@ -7,3 +7,6 @@ java.lang.IllegalStateException
                 Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
 
 Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [affectation_kpi]
+
+674741
+https://fastfile.ocpgroup.ma/download/7s32dl5s3nta5r9ul3ncp9fuo6xmydicliwylb3epyy4o45786m5hy7uj3xrtz5l7kznjpdae32l6pmqjd8okgjdfw3zpcvp1af89t8z7nu3p21um27et5sr7ui1ofm9
