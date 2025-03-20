@@ -10,3 +10,5 @@ Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-valid
 
 674741
 https://fastfile.ocpgroup.ma/download/7s32dl5s3nta5r9ul3ncp9fuo6xmydicliwylb3epyy4o45786m5hy7uj3xrtz5l7kznjpdae32l6pmqjd8okgjdfw3zpcvp1af89t8z7nu3p21um27et5sr7ui1ofm9
+
+--2025-03-19 14:04:38.616 - INFO 8 --- [nio-8088-exec-3] [Imane.AKARKAOU_admin] m.services.FundingRequestService         : The final result using commandeId [FundingRequestDto(id=null, bravoId=null, supplierOracleCode=null, purchaseOrderId=3900012333, purchaseOrderRef=3900012333, businessUnitName=PK01, status=Validé, purchaseOrderStatus=Validé, purchaseOrderApprovalDate=2025-01-05, purchaseOrderAmount=129830.8, purchaseOrderAmountCallOf=null, achievementPercentage=0.0, achievementPercentageCallOf=0.0, purchaseOrderDescription=PO sce spot, fundingAgencyId=null, fundingAgencyName=null, approvalAttachmentAmount=0.0, billedAmount=0.0, paidAmount=0.0, purchaseOrderCategory=Terrassement, Voiries et Réseaux Divers (VRD), fundingAgencyEmail=null, purchaseOrderPaymentTermsName=N030, purchaseOrderPaymentTermsDescription=Paiement à 30 jours net, companyName=null, source=commande)] 
