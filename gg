@@ -12,7 +12,4 @@ input-gathering-mining-prep.apps.techlab.ocpgroup.ma
 SchemaManagementException
 
 
-java.lang.IllegalStateException
-        Caused by: org.springframework.beans.factory.BeanCreationException
-            Caused by: javax.persistence.PersistenceException
-                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
+Schema-validation: missing column [upper_kpi_code] in table [param_kpi]
