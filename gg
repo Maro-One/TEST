@@ -12,6 +12,7 @@ input-gathering-mining-prep.apps.techlab.ocpgroup.ma
 SchemaManagementException
 
 
-java.lang.IllegalAccessError: class lombok.javac.apt.LombokProcessor (in unnamed module @0x14d
-25857) cannot access class com.sun.tools.javac.processing.JavacProcessingEnvironment (in module jdk.compiler) because module jdk.compiler does not export com.sun.tools.javac.processing to un
-named module @0x14d25857
+java.lang.IllegalStateException
+        Caused by: org.springframework.beans.factory.BeanCreationException
+            Caused by: javax.persistence.PersistenceException
+                Caused by: org.hibernate.tool.schema.spi.SchemaManagementException
