@@ -2,3 +2,4 @@ oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1J
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
 https://git.digilab.ocpgroup.ma/jfc2/daily-meeting-mining
+-java.lang.ArithmeticException: / by zero
