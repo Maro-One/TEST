@@ -5,3 +5,5 @@ https://git.digilab.ocpgroup.ma/jfc2/daily-meeting-mining
 -java.lang.ArithmeticException: / by zero
 
 https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1674
+
+keytool -importcert -alias your_alias_name -file certificate_file -keystore keystore_file -storepass keystore_password
