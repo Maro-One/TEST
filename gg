@@ -22,3 +22,14 @@ keytool -importcert -alias your_alias_name -file certificate_file -keystore keys
 }
 
 EndPoint :  /PM/ServiceRequest/
+
+{
+"TagID": "KH_BATCH1_ID_BATCH",
+"Timestamp": "2025-04-23T07:55:29.0171966Z",
+"Value": 17856,
+"UnitsAbbreviation": "",
+"Good": true,
+"Questionable": false, 
+"Substituted": false,
+"Quality": null
+}
