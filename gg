@@ -42,11 +42,11 @@ https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_STATUS
 "userFirstName" : "abess"   ,       
 "userLastName"  :   "aldalil",  
 "userEmail" :       "abess.aldalil@ocpgroup.ma" ,
-"technicalObject"   :   ""  ,   
+"technicalObject"   :   "JL-F41-SAP"  ,   
 "shortDescription"  :   "shortDescription"      ,
 "longDescription"   :   "longDescription"  ,
 "responsibleWorkstation"    :   "abess.aldalil@ocpgroup.ma" ,
 "reviewType"    :   "ZC"  ,
 "priority" :    "2"  ,
-"planningDivision" :    ""      
+"planningDivision" :    "S_BdM_ELIN"      
 }
