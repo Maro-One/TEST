@@ -33,3 +33,5 @@ EndPoint :  /PM/ServiceRequest/
 "Substituted": false,
 "Quality": null
 }
+
+https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_ID_BATCH
