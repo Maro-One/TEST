@@ -37,3 +37,16 @@ EndPoint :  /PM/ServiceRequest/
 https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_ID_BATCH
 
 https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_STATUS
+
+{
+"userFirstName" : "abess"   ,       
+"userLastName"  :   "aldalil",  
+"userEmail" :       "abess.aldalil@ocpgroup.ma" ,
+"technicalObject"   :   ""  ,   
+"shortDescription"  :   "shortDescription"      ,
+"longDescription"   :   "longDescription"  ,
+"responsibleWorkstation"    :   "abess.aldalil@ocpgroup.ma" ,
+"reviewType"    :   "ZC"  ,
+"priority" :    "2"  ,
+"planningDivision" :    ""      
+}
