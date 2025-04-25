@@ -35,3 +35,5 @@ EndPoint :  /PM/ServiceRequest/
 }
 
 https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_ID_BATCH
+
+https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_STATUS
