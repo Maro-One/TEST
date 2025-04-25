@@ -50,3 +50,6 @@ https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_STATUS
 "priority" :    "2"  ,
 "planningDivision" :    "S_BdM_ELIN"      
 }
+
+      jdbc-url: 'jdbc:oracle:thin:@10.21.62.93:1521:DEVEBS2'
+      username: XXGMAO
