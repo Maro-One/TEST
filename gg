@@ -1,55 +1,34 @@
 oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1JJbTZNaXZLdzhHNVVLSklKbDAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJwcm94eS1pbnRlZ3JhdGlvbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXRva2VuLWhyYm5yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InZpZXciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJhYzhkNGE5OC05MmU2LTRlYjItOWUyMC1lZmNmNGE2NWEwNTMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6cHJveHktaW50ZWdyYXRpb246dmlldyJ9.b4HzsqnqyCD8JlyNZKzUqxWkHMLHKYwGHIXRzYQ_xjWJ-yGoSHid6vdlc8E2VMXPXEQYxWe9m2KRtxbaWBn6bRxPAMAbEiVG4B1DifRJi3BXFFI6-WdRQfci6JQx2f6jRQRYWA6SQyXUSPH92IwFDwQg5FlWKHRJPYdlLa_E11AKUE4gGNXwW22OWUM7ykhGv8WA82RtDkp1YwyzDFkkZIEhM3MjT_8rxdDqTeuUgvVMkSXDS_4IyBHTM5XYwFUPnL6cilwgV5O9KDk8yGkMcm5CTxp9g6TBzp0EsO8nhJ0M8-uLSTjQ1SZSkHHkUgyb0o6akwicHM_pE-UzJhq_m5gOE6cssB50isAL4f4Si3PvK3gqFCgHUvHCx9l1sG5h6YzC50dUb5eGQQDXEyTKIfnYZqVtyAwAs420RvBInZQa6k1ljBA8RZgw9SvwFAIbN7VWcrXxBWnqs7O2de6nWJSaJ-z2v0zf_jHvFfuy0-u90RCao_f-ie9Pwmg-NMEdV5EEIt8OJWNt0QpijKXWOn4zbAq9A2S7YLyRHatwBZ8FWgE51MA4RmLM6cq8anjU5QNK3jZGHNnjERCqwBpDFFJJjs1k8vy_VHLw7GbShDeG-J2WYQZBrOnuAo9LtvMrOjGkXHY1v3JGKjdLzBYL68hC5isGe5osBlbhJia6wck --server=https://api.techlab.ocpgroup.ma:6443
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
-https://git.digilab.ocpgroup.ma/jfc2/daily-meeting-mining
--java.lang.ArithmeticException: / by zero
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
-https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1674
+function UserList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-keytool -importcert -alias your_alias_name -file certificate_file -keystore keystore_file -storepass keystore_password
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then((response) => {
+        setUsers(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+        setLoading(false);
+      });
+  }, []); // empty dependency array = run once on mount
 
-{
-"userFirstName" : ""   ,       
-"userLastName"  :   "",  
-"userEmail" :       "" ,
-"technicalObject"   :   ""  ,   
-"shortDescription"  :   ""      ,
-"longDescription"   :   ""  ,
-"responsibleWorkstation"    :   ""  ,
-"reviewType"    :   "ZC"  ,
-"priority" :    "2"  ,
-"planningDivision" :    ""      
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
 }
 
-EndPoint :  /PM/ServiceRequest/
-
-{
-"TagID": "KH_BATCH1_ID_BATCH",
-"Timestamp": "2025-04-23T07:55:29.0171966Z",
-"Value": 17856,
-"UnitsAbbreviation": "",
-"Good": true,
-"Questionable": false, 
-"Substituted": false,
-"Quality": null
-}
-
-https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_ID_BATCH
-
-https://api-pi-stg.digilab.ocpgroup.ma/value?tagName=KH_BATCH1_STATUS
-
-{
-"userFirstName" : "abess"   ,       
-"userLastName"  :   "aldalil",  
-"userEmail" :       "abess.aldalil@ocpgroup.ma" ,
-"technicalObject"   :   "JL-F41-SAP"  ,   
-"shortDescription"  :   "shortDescription"      ,
-"longDescription"   :   "longDescription"  ,
-"responsibleWorkstation"    :   "abess.aldalil@ocpgroup.ma" ,
-"reviewType"    :   "ZC"  ,
-"priority" :    "2"  ,
-"planningDivision" :    "S_BdM_ELIN"      
-}
-
-      jdbc-url: 'jdbc:oracle:thin:@10.21.62.93:1521:DEVEBS2'
-      username: XXGMAO
+export default UserList;
