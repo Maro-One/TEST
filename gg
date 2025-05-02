@@ -1,32 +1,64 @@
 oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1JJbTZNaXZLdzhHNVVLSklKbDAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJwcm94eS1pbnRlZ3JhdGlvbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXRva2VuLWhyYm5yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InZpZXciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJhYzhkNGE5OC05MmU2LTRlYjItOWUyMC1lZmNmNGE2NWEwNTMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6cHJveHktaW50ZWdyYXRpb246dmlldyJ9.b4HzsqnqyCD8JlyNZKzUqxWkHMLHKYwGHIXRzYQ_xjWJ-yGoSHid6vdlc8E2VMXPXEQYxWe9m2KRtxbaWBn6bRxPAMAbEiVG4B1DifRJi3BXFFI6-WdRQfci6JQx2f6jRQRYWA6SQyXUSPH92IwFDwQg5FlWKHRJPYdlLa_E11AKUE4gGNXwW22OWUM7ykhGv8WA82RtDkp1YwyzDFkkZIEhM3MjT_8rxdDqTeuUgvVMkSXDS_4IyBHTM5XYwFUPnL6cilwgV5O9KDk8yGkMcm5CTxp9g6TBzp0EsO8nhJ0M8-uLSTjQ1SZSkHHkUgyb0o6akwicHM_pE-UzJhq_m5gOE6cssB50isAL4f4Si3PvK3gqFCgHUvHCx9l1sG5h6YzC50dUb5eGQQDXEyTKIfnYZqVtyAwAs420RvBInZQa6k1ljBA8RZgw9SvwFAIbN7VWcrXxBWnqs7O2de6nWJSaJ-z2v0zf_jHvFfuy0-u90RCao_f-ie9Pwmg-NMEdV5EEIt8OJWNt0QpijKXWOn4zbAq9A2S7YLyRHatwBZ8FWgE51MA4RmLM6cq8anjU5QNK3jZGHNnjERCqwBpDFFJJjs1k8vy_VHLw7GbShDeG-J2WYQZBrOnuAo9LtvMrOjGkXHY1v3JGKjdLzBYL68hC5isGe5osBlbhJia6wck --server=https://api.techlab.ocpgroup.ma:6443
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import {
+  Table, TableBody, TableCell, TableContainer,
+  TableHead, TableRow, IconButton, Collapse, Paper, Box
+} from '@mui/material';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 
-class UserList extends Component {
-  state = { users: [], loading: true };
+function Row({ row }) {
+  const [open, setOpen] = useState(false);
 
-  componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-      .then((res) => this.setState({ users: res.data, loading: false }))
-      .catch((err) => {
-        console.error("Error fetching users:", err);
-        this.setState({ loading: false });
-      });
-  }
+  return (
+    <>
+      <TableRow>
+        <TableCell>
+          <IconButton size="small" onClick={() => setOpen(!open)}>
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+          </IconButton>
+        </TableCell>
+        <TableCell>{row.name}</TableCell>
+        <TableCell>{row.calories}</TableCell>
+      </TableRow>
 
-  render() {
-    if (this.state.loading) return <p>Loading...</p>;
-
-    return (
-      <ul>
-        {this.state.users.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-    );
-  }
+      <TableRow>
+        <TableCell colSpan={3} style={{ paddingBottom: 0, paddingTop: 0 }}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box margin={2}>
+              <strong>Details:</strong>
+              <div>{row.details}</div>
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </>
+  );
 }
 
-export default UserList;
+export default function CollapsibleTable() {
+  const rows = [
+    { name: 'Ice cream', calories: 200, details: 'Vanilla, Chocolate' },
+    { name: 'Pizza', calories: 300, details: 'Cheese, Tomato' },
+  ];
+
+  return (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell>Food</TableCell>
+            <TableCell>Calories</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row, i) => (
+            <Row key={i} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
