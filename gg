@@ -2,13 +2,14 @@ oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1J
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
 <TableRow className={classes.row}>
-	<TableCell colSpan={fullColumnCount} style={{padding: 0}}>
-	<Collapse in={showOrHide} timeout="auto" >
-    <Box margin={1}>
-          {sousKpis.map(kpi => (
-            <Box>
-                <TableCell>
-                </TableCell>
+  <TableCell colSpan={fullColumnCount} style={{ padding: 0 }}>
+    <Collapse in={showOrHide} timeout="auto" unmountOnExit>
+      <Box margin={1}>
+        <Table size="small">
+          <TableBody>
+            {sousKpis.map((kpi, index) => (
+              <TableRow key={index}>
+                <TableCell />
                 <TableCell>
                   <TooltipWithStyle title={kpi.title}>
                     <div className="kpi-list__table-container__table_row__title">{kpi.title}</div>
@@ -33,20 +34,21 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
                 <TableCell>
                   <Box className={classes.actions}>
                     <Button
-                    className={classes.button}
-                    onClick={() => onOpenDisableKpi(kpi)}
+                      className={classes.button}
+                      onClick={() => onOpenDisableKpi(kpi)}
                     >
-                    {"Désactiver"}
-                  </Button>
-                  <IconButton onClick={() => onOpenKpiEdit(true, kpi)}>
-                    <Edit />
-                  </IconButton>
-                </Box>
-              </TableCell>
-              </Box>
-              ))}
-    </Box>
-	</Collapse>
+                      Désactiver
+                    </Button>
+                    <IconButton onClick={() => onOpenKpiEdit(true, kpi)}>
+                      <Edit />
+                    </IconButton>
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+    </Collapse>
   </TableCell>
 </TableRow>
-
