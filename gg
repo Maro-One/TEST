@@ -6,16 +6,4 @@ https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1675
 
 http://pvlxd12437.ocp.ma:50100/RESTAdapter/PM/ServiceRequest/
  
-const renderMultiSelect = ({ input, label, children }) => (
-  <FormControl fullWidth>
-    <InputLabel>{label}</InputLabel>
-    <Select
-      multiple
-      value={input.value || []}
-      onChange={(event) => input.onChange(event.target.value)}
-      onBlur={() => input.onBlur(input.value)} // important for Redux Form
-    >
-      {children}
-    </Select>
-  </FormControl>
-);
+Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements
