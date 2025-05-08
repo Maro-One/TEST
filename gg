@@ -58,3 +58,5 @@ class MultiSelectDropdown extends Component {
 }
 
 export default MultiSelectDropdown;
+
+ Objects are not valid as a React child (found: object with keys {affectationKpiId, title, value, target, rule, unit, comment, categoryKPI, collapsed, isFirstKpi, date, kpiFetchType, hasTags, hasMtd, cumulMonth, targetMonth, openedTasks, forced, sousHydratedKpiDto}). If you meant to render a collection of children, use an array instead.
