@@ -59,4 +59,11 @@ class MultiSelectDropdown extends Component {
 
 export default MultiSelectDropdown;
 
- Objects are not valid as a React child (found: object with keys {affectationKpiId, title, value, target, rule, unit, comment, categoryKPI, collapsed, isFirstKpi, date, kpiFetchType, hasTags, hasMtd, cumulMonth, targetMonth, openedTasks, forced, sousHydratedKpiDto}). If you meant to render a collection of children, use an array instead.
+ : The key `autoCompletePaper` provided to the classes prop is not implemented in ForwardRef(Select).
+You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
+I: The key `singleValue` provided to the classes prop is not implemented in ForwardRef(Select).
+You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
+The key `checked` provided to the classes prop is not implemented in ForwardRef(Select).
+You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stac
+hook.js:591 Material-UI: The key `fieldSecurity` provided to the classes prop is not implemented in ForwardRef(Select).
+You can only override one of the following: 
