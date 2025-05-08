@@ -6,23 +6,26 @@ https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1675
 
 http://pvlxd12437.ocp.ma:50100/RESTAdapter/PM/ServiceRequest/
  
-import React from "react";
+import React, { Component } from "react";
 import {
-  MenuItem,
-  Select,
-  Checkbox,
-  ListItemText,
   FormControl,
   InputLabel,
+  Select,
+  MenuItem,
+  Checkbox,
+  ListItemText,
   Input
 } from "@material-ui/core";
 
 const options = ["Apple", "Banana", "Cherry", "Date"];
 
-class MultiSelectDropdown extends React.Component {
-  state = {
-    selectedOptions: []
-  };
+class MultiSelectDropdown extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOptions: [] // ✅ Make sure this is initialized
+    };
+  }
 
   handleChange = (event) => {
     this.setState({ selectedOptions: event.target.value });
@@ -32,7 +35,7 @@ class MultiSelectDropdown extends React.Component {
     const { selectedOptions } = this.state;
 
     return (
-      <FormControl style={{ minWidth: 300, margin: '1rem 0' }}>
+      <FormControl style={{ minWidth: 300, marginTop: 16 }}>
         <InputLabel id="multi-select-label">Fruits</InputLabel>
         <Select
           labelId="multi-select-label"
@@ -44,7 +47,7 @@ class MultiSelectDropdown extends React.Component {
         >
           {options.map((option) => (
             <MenuItem key={option} value={option}>
-              <Checkbox checked={selectedOptions.indexOf(option) > -1} />
+              <Checkbox checked={selectedOptions.includes(option)} />
               <ListItemText primary={option} />
             </MenuItem>
           ))}
