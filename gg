@@ -7,3 +7,6 @@ https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1675
 http://pvlxd12437.ocp.ma:50100/RESTAdapter/PM/ServiceRequest/
  
 Illegal attempt to map a non collection as a @OneToMany, @ManyToMany or @CollectionOfElements
+
+@Query("SELECT u FROM User u WHERE u.id IN :ids AND u.active = true")
+List<User> findActiveUsersByIds(@Param("ids") List<Long> ids);
