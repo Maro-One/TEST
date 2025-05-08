@@ -14,8 +14,8 @@ import {
   ListItemText,
   FormControl,
   InputLabel,
-  OutlinedInput
-} from "@mui/material";
+  Input
+} from "@material-ui/core";
 
 const options = ["Apple", "Banana", "Cherry", "Date"];
 
@@ -27,14 +27,14 @@ export default function MultiSelectDropdown() {
   };
 
   return (
-    <FormControl sx={{ m: 1, width: 300 }}>
+    <FormControl style={{ minWidth: 300, margin: '1rem 0' }}>
       <InputLabel id="multi-select-label">Fruits</InputLabel>
       <Select
         labelId="multi-select-label"
         multiple
         value={selectedOptions}
         onChange={handleChange}
-        input={<OutlinedInput label="Fruits" />}
+        input={<Input />}
         renderValue={(selected) => selected.join(", ")}
       >
         {options.map((option) => (
