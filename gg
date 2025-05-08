@@ -6,64 +6,16 @@ https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1675
 
 http://pvlxd12437.ocp.ma:50100/RESTAdapter/PM/ServiceRequest/
  
-import React, { Component } from "react";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Checkbox,
-  ListItemText,
-  Input
-} from "@material-ui/core";
-
-const options = ["Apple", "Banana", "Cherry", "Date"];
-
-class MultiSelectDropdown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOptions: [] // ✅ Make sure this is initialized
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({ selectedOptions: event.target.value });
-  };
-
-  render() {
-    const { selectedOptions } = this.state;
-
-    return (
-      <FormControl style={{ minWidth: 300, marginTop: 16 }}>
-        <InputLabel id="multi-select-label">Fruits</InputLabel>
-        <Select
-          labelId="multi-select-label"
-          multiple
-          value={selectedOptions}
-          onChange={this.handleChange}
-          input={<Input />}
-          renderValue={(selected) => selected.join(", ")}
-        >
-          {options.map((option) => (
-            <MenuItem key={option} value={option}>
-              <Checkbox checked={selectedOptions.includes(option)} />
-              <ListItemText primary={option} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    );
-  }
-}
-
-export default MultiSelectDropdown;
-
- : The key `autoCompletePaper` provided to the classes prop is not implemented in ForwardRef(Select).
-You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
-I: The key `singleValue` provided to the classes prop is not implemented in ForwardRef(Select).
-You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
-The key `checked` provided to the classes prop is not implemented in ForwardRef(Select).
-You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stac
-hook.js:591 Material-UI: The key `fieldSecurity` provided to the classes prop is not implemented in ForwardRef(Select).
-You can only override one of the following: 
+const renderMultiSelect = ({ input, label, children }) => (
+  <FormControl fullWidth>
+    <InputLabel>{label}</InputLabel>
+    <Select
+      multiple
+      value={input.value || []}
+      onChange={(event) => input.onChange(event.target.value)}
+      onBlur={() => input.onBlur(input.value)} // important for Redux Form
+    >
+      {children}
+    </Select>
+  </FormControl>
+);
