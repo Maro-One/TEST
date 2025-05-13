@@ -1,5 +1,57 @@
 oc login --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IkFEUzkwUTlXQ3NJcldWVTdCQ1RBaUVEd1JJbTZNaXZLdzhHNVVLSklKbDAifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJwcm94eS1pbnRlZ3JhdGlvbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ2aWV3LXRva2VuLWhyYm5yIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6InZpZXciLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJhYzhkNGE5OC05MmU2LTRlYjItOWUyMC1lZmNmNGE2NWEwNTMiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6cHJveHktaW50ZWdyYXRpb246dmlldyJ9.b4HzsqnqyCD8JlyNZKzUqxWkHMLHKYwGHIXRzYQ_xjWJ-yGoSHid6vdlc8E2VMXPXEQYxWe9m2KRtxbaWBn6bRxPAMAbEiVG4B1DifRJi3BXFFI6-WdRQfci6JQx2f6jRQRYWA6SQyXUSPH92IwFDwQg5FlWKHRJPYdlLa_E11AKUE4gGNXwW22OWUM7ykhGv8WA82RtDkp1YwyzDFkkZIEhM3MjT_8rxdDqTeuUgvVMkSXDS_4IyBHTM5XYwFUPnL6cilwgV5O9KDk8yGkMcm5CTxp9g6TBzp0EsO8nhJ0M8-uLSTjQ1SZSkHHkUgyb0o6akwicHM_pE-UzJhq_m5gOE6cssB50isAL4f4Si3PvK3gqFCgHUvHCx9l1sG5h6YzC50dUb5eGQQDXEyTKIfnYZqVtyAwAs420RvBInZQa6k1ljBA8RZgw9SvwFAIbN7VWcrXxBWnqs7O2de6nWJSaJ-z2v0zf_jHvFfuy0-u90RCao_f-ie9Pwmg-NMEdV5EEIt8OJWNt0QpijKXWOn4zbAq9A2S7YLyRHatwBZ8FWgE51MA4RmLM6cq8anjU5QNK3jZGHNnjERCqwBpDFFJJjs1k8vy_VHLw7GbShDeG-J2WYQZBrOnuAo9LtvMrOjGkXHY1v3JGKjdLzBYL68hC5isGe5osBlbhJia6wck --server=https://api.techlab.ocpgroup.ma:6443
 https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
-ocp.jfc2.dailymeeting.services.TaskServiceTest > unnecessary Mockito stubbings FAILED
-    org.mockito.exceptions.misusing.UnnecessaryStubbingException
+<!DOCTYPE html>
+<html>
+  <body style="margin:0; padding:0; font-family:Arial, sans-serif; background-color:#ffffff;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto;">
+      <tr>
+        <td style="padding:20px; font-size:14px; color:#333333;">
+          <h2 style="color:#0055a5; margin-bottom:10px;">Survey Results</h2>
+          <p style="margin-bottom:20px;">Percentage of users who chose each option:</p>
+
+          <!-- Column Chart with Percentages -->
+          <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:auto;">
+            <!-- % Labels -->
+            <tr>
+              <td align="center" style="width:60px; font-size:13px;">75%</td>
+              <td align="center" style="width:60px; font-size:13px;">50%</td>
+              <td align="center" style="width:60px; font-size:13px;">90%</td>
+              <td align="center" style="width:60px; font-size:13px;">35%</td>
+            </tr>
+
+            <!-- Columns -->
+            <tr valign="bottom" style="height:160px;">
+              <!-- Option A -->
+              <td align="center">
+                <div style="width:30px; height:120px; background-color:#4caf50; border-radius:4px;"></div>
+              </td>
+              <!-- Option B -->
+              <td align="center">
+                <div style="width:30px; height:80px; background-color:#2196f3; border-radius:4px;"></div>
+              </td>
+              <!-- Option C -->
+              <td align="center">
+                <div style="width:30px; height:144px; background-color:#ff9800; border-radius:4px;"></div>
+              </td>
+              <!-- Option D -->
+              <td align="center">
+                <div style="width:30px; height:56px; background-color:#f44336; border-radius:4px;"></div>
+              </td>
+            </tr>
+
+            <!-- Labels -->
+            <tr>
+              <td align="center" style="font-size:13px; padding-top:6px;">Option A</td>
+              <td align="center" style="font-size:13px; padding-top:6px;">Option B</td>
+              <td align="center" style="font-size:13px; padding-top:6px;">Option C</td>
+              <td align="center" style="font-size:13px; padding-top:6px;">Option D</td>
+            </tr>
+          </table>
+
+          <p style="margin-top:30px; font-size:12px; color:#777777;">&copy; 2025 SurveyBot • All rights reserved</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
