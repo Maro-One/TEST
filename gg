@@ -3,53 +3,46 @@ https://console-openshift-console.apps.techlab.ocpgroup.ma/
 	
 <!DOCTYPE html>
 <html>
-  <body style="margin:0; padding:0; font-family:Arial, sans-serif; background-color:#ffffff;">
+  <body style="margin:0; padding:0; font-family:Arial, sans-serif;">
     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto;">
       <tr>
         <td style="padding:20px; font-size:14px; color:#333333;">
-          <h2 style="color:#0055a5; margin-bottom:10px;">Survey Results</h2>
-          <p style="margin-bottom:20px;">Percentage of users who chose each option:</p>
+          <h2 style="color:#0055a5; margin-bottom:10px;">KPI Report</h2>
+          <p style="margin-bottom:20px;">Here’s the number of completed tasks by department:</p>
 
-          <!-- Column Chart with Percentages -->
-          <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:auto;">
-            <!-- % Labels -->
-            <tr>
-              <td align="center" style="width:60px; font-size:13px;">75%</td>
-              <td align="center" style="width:60px; font-size:13px;">50%</td>
-              <td align="center" style="width:60px; font-size:13px;">90%</td>
-              <td align="center" style="width:60px; font-size:13px;">35%</td>
-            </tr>
+          <!-- Horizontal Bar 1 -->
+          <div style="margin-bottom:12px;">
+            <div style="margin-bottom:4px;">Engineering — <strong>460</strong></div>
+            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+              <div style="width:92%; height:16px; background:#4caf50; border-radius:8px;"></div>
+            </div>
+          </div>
 
-            <!-- Columns -->
-            <tr valign="bottom" style="height:160px;">
-              <!-- Option A -->
-              <td align="center">
-                <div style="width:30px; height:120px; background-color:#4caf50; border-radius:4px;"></div>
-              </td>
-              <!-- Option B -->
-              <td align="center">
-                <div style="width:30px; height:80px; background-color:#2196f3; border-radius:4px;"></div>
-              </td>
-              <!-- Option C -->
-              <td align="center">
-                <div style="width:30px; height:144px; background-color:#ff9800; border-radius:4px;"></div>
-              </td>
-              <!-- Option D -->
-              <td align="center">
-                <div style="width:30px; height:56px; background-color:#f44336; border-radius:4px;"></div>
-              </td>
-            </tr>
+          <!-- Horizontal Bar 2 -->
+          <div style="margin-bottom:12px;">
+            <div style="margin-bottom:4px;">Marketing — <strong>280</strong></div>
+            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+              <div style="width:56%; height:16px; background:#2196f3; border-radius:8px;"></div>
+            </div>
+          </div>
 
-            <!-- Labels -->
-            <tr>
-              <td align="center" style="font-size:13px; padding-top:6px;">Option A</td>
-              <td align="center" style="font-size:13px; padding-top:6px;">Option B</td>
-              <td align="center" style="font-size:13px; padding-top:6px;">Option C</td>
-              <td align="center" style="font-size:13px; padding-top:6px;">Option D</td>
-            </tr>
-          </table>
+          <!-- Horizontal Bar 3 -->
+          <div style="margin-bottom:12px;">
+            <div style="margin-bottom:4px;">Support — <strong>150</strong></div>
+            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+              <div style="width:30%; height:16px; background:#ff9800; border-radius:8px;"></div>
+            </div>
+          </div>
 
-          <p style="margin-top:30px; font-size:12px; color:#777777;">&copy; 2025 SurveyBot • All rights reserved</p>
+          <!-- Horizontal Bar 4 -->
+          <div style="margin-bottom:12px;">
+            <div style="margin-bottom:4px;">Sales — <strong>90</strong></div>
+            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+              <div style="width:18%; height:16px; background:#f44336; border-radius:8px;"></div>
+            </div>
+          </div>
+
+          <p style="margin-top:30px; font-size:12px; color:#777777;">&copy; 2025 Internal Metrics Board</p>
         </td>
       </tr>
     </table>
