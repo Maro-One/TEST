@@ -1,7 +1,337 @@
-https://fastfile.ocpgroup.ma/download/7lz4d1y0ggvd3u12n3kcyqt5nghiyzn817a71qi31okxcyxo6bcspu1b2iy4l709frcg3a12912l0r9klntc3gut6byimnhpq4l0e11q9xh2yo63dsmjuvdvqidepyvo
-182729
-cdea472ddeeaad56ff305dc96b6219e667c7685f
-https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1678
-<IconButton style={{ visibility: 'hidden' }}>
-  <span style={{ width: 24, height: 24 }} />
-</IconButton>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
+<table cellspacing="0" border="" cellpadding="0" width="100%" bgcolor="#f2f3f8"
+       style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
+    <tr>
+        <td>
+            <table style="background-color: #f2f3f8; max-width:95%; margin:0 auto;" width="100%" border="0"
+                   align="center" cellpadding="0" cellspacing="0">
+                <!-- <tr>
+               <td style="height:80px;">&nbsp;</td>
+               </tr> -->
+                <tr>
+                </tr>
+                <tr>
+                    <td style="height:20px;">&nbsp;</td>
+                </tr>
+                <table width="105%" border="0" align="center" cellpadding="0" cellspacing="0"
+                       style="max-width:100%; background:#fff; border-radius:3px;-webkit-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);-moz-box-shadow:0 6px 18px 0 rgba(0,0,0,.06);box-shadow:0 6px 18px 0 rgba(0,0,0,.06);padding:0 50px;">
+                    <tr>
+                        <td align=left valign=top style="height:40px;">
+                            <img width=40 height=40 style="float: left;width: 50px;height:50px;"
+                                 src="data:image/png;base64,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" />
+                        </td>
+                        <td rowspan=2 align=left valign=top style="height:40px;">
+                            <img width=40 height=40 style="float: right;width:60px;height:60px;"
+                                 src="data:image/png;base64,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" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"
+                                   style="max-width:100%; background:#fff; border-radius:3px;;padding:0 40px;">
+                                <tr>
+                                    <td style="padding:0 15px; text-align:center;">
+                                        <h1 leftmargin="40px"
+                                            style="color:#1e1e2d; font-weight:100; margin:0;font-size:32px;font-family:'Rubik',sans-serif;margin-left:40px;">
+                                            Compte rendu des réunions matinales de la semaine
+                                            <div >14 mai 2025</div>
+                                        </h1>
+                                        <h2
+                                                style="color:#1e1e2d; margin:2px;font-size:15px;font-family:'Rubik',sans-serif;">
+                                            <span >testtest</span>
+                                        </h2>
+                                        <span style="display:inline-block; vertical-align:middle; margin:26px; border-bottom:1px solid #cecece;
+                                    width:100px;"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0"
+                                               style="width: 110%; border: 1px solid #ededed;border-top: 0px;">
+                                            <tr
+                                                    style="font-weight: bold; color:#1e1e2d;margin:0px;font-size:15px;font-family:'Rubik',sans-serif;">
+                                                <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #202121;">
+                                                    <div>
+                                                        Animateurs: <span >abess aldalil</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #202121; font-size: 15px">
+                                                    <div
+                                                            style=" padding-bottom: 15px; font-weight: 600; font-size: 12px; font-family: 'Rubik',sans-serif;">
+                                                        Le détail des présences:</div>
+                                                    <table cellpadding="0" cellspacing="0" style="width:75.0%; mso-cellspacing:0cm; border:solid windowtext 1.0pt; mso-border-alt:solid windowtext .5pt; mso-yfti-tbllook:1184; mso-padding-alt:0cm 0cm 0cm 0cm; mso-border-insideh: .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext; border:1px solid #01020294;
+                                             ">
+                                                        <tbody>
+                                                        <tr
+                                                                style="border-bottom:1px solid #01020294;font-size:12px;mso-yfti-irow:1;mso-yfti-lastrow:yes;border-bottom:#01020294;">
+                                                            <th>Corps de métiers</th>
+                                                            <th>Représentants</th>
+                                                        </tr>
+                                                        <tr style="border-bottom:2px solid #01020294;mso-yfti-irow:1;mso-yfti-lastrow:yes;border-bottom:#01020294;">
+                                                            <td style="padding:0px 0px 2px 15px;">Bureau des méthodes</td>
+                                                            <td>
+                                                                <ul style="margin: 0.5px">
+                                                                    <li>utilisateur20</ul>
+                                                            </td>
+                                                        </tr>
+                                                        <tr style="border-bottom:2px solid #01020294;mso-yfti-irow:1;mso-yfti-lastrow:yes;border-bottom:#01020294;">
+                                                            <td style="padding:0px 0px 2px 15px;">Mécanique</td>
+                                                            <td>
+                                                                <ul style="margin: 0.5px">
+                                                                    </ul>
+                                                                <ul style="margin: 0.5px">
+                                                                    </ul>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto;">
+                                    <tr>
+                                        <td style="padding:20px; font-size:14px; color:#333333;">
+
+                                        <!-- Column Chart with Percentages -->
+                                        <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:auto;">
+                                            <!-- % Labels -->
+                                            <tr>
+                                            <td align="center" style="width:60px; font-size:13px;"><span>50%</span></td>
+                                            <td align="center" style="width:60px; font-size:13px;"><span>0%</td>
+                                            <td align="center" style="width:60px; font-size:13px;"><span>0%</td>
+                                            <td align="center" style="width:60px; font-size:13px;"><span>0%</td>
+                                            </tr>
+
+                                            <!-- Columns -->
+                                            <tr valign="bottom" style="height:160px;">
+                                            <!-- Option A -->
+                                            <td align="center">
+                                                <div style="width:300px; height:80.0px; background-color:#4caf50; border-radius:4px; margin-left: 30px; margin-right: 30px;"></div>
+                                            </td>
+                                            <!-- Option B -->
+                                            <td align="center">
+                                                <div style="width:300px; height:1.0px; background-color:#2196f3; border-radius:4px; margin-left: 30px; margin-right: 30px;"></div>
+                                            </td>
+                                            <!-- Option C -->
+                                            <td align="center">
+                                                <div style="width:300px; height:1.0px; background-color:#ff9800; border-radius:4px; margin-left: 30px; margin-right: 30px;"></div>
+                                            </td>
+                                            <!-- Option D -->
+                                            <td align="center">
+                                                <div style="width:300px; height:1.0px; background-color:#f44336; border-radius:4px; margin-left: 30px; margin-right: 30px;"></div>
+                                            </td>
+                                            </tr>
+
+                                            <!-- Labels -->
+                                            <tr>
+                                            <td align="center" style="font-size:13px; padding-top:6px;">Le taux de participation à la réunion</td>
+                                            <td align="center" style="font-size:13px; padding-top:6px;">Le taux de remontée des KPIs</td>
+                                            <td align="center" style="font-size:13px; padding-top:6px;">Le taux des KPIs au vert</td>
+                                            <td align="center" style="font-size:13px; padding-top:6px;">Le taux d'actions clôturées à temps</td>
+                                            </tr>
+                                        </table>
+                                        </td>
+                                    </tr>
+                                    </table>
+
+                                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto;">
+                                    <tr>
+                                        <td style="padding:20px; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5; margin-bottom:10px;">KPI Report</h2>
+                                        <p style="margin-bottom:20px;">Here’s the number of completed tasks by department:</p>
+
+                                        <!-- Horizontal Bar 1 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d'actions issues du contact de sécurité — <strong><span>4</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:57.142857142857146%; height:16px; background:#4caf50; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 2 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb de KPI au rouge sans actions — <strong><span>0</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:0.0%; height:16px; background:#2196f3; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 3 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’actions clôturées — <strong><span>0</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:0.0%; height:16px; background:#ff9800; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 4 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’actions en retard — <strong><span>5</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:71.42857142857143%; height:16px; background:#f44336; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 1 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’actions remontées — <strong><span>0</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:0.0%; height:16px; background:#4caf50; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 2 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’actions reportées — <strong><span>0</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:0.0%; height:16px; background:#2196f3; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 3 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’anomalies remontées — <strong><span>7</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:100.0%; height:16px; background:#ff9800; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Horizontal Bar 4 -->
+                                        <div style="margin-bottom:12px;">
+                                            <div style="margin-bottom:4px;">Nb d’anomalies non prises en charge — <strong><span>7</span></strong></div>
+                                            <div style="width:100%; height:16px; background:#e0e0e0; border-radius:8px;">
+                                            <div style="width:100.0%; height:16px; background:#f44336; border-radius:8px;"></div>
+                                            </div>
+                                        </div>
+
+                                        </td>
+                                    </tr>
+                                    </table>
+
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; margin:auto;">
+                                    <tr>
+                                        <td style="padding:20px; text-align:center; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5;">Réunion</h2>
+
+                                        <!-- Minutes Block -->
+                                        <table cellpadding="6" cellspacing="4" style="margin:auto; background:#000; border-radius:8px;">
+                                            <tr>
+                                            <td style="background:#1c1c1c; color:#00ff00; font-size:32px; font-weight:bold; padding:12px 20px; border-radius:6px;">
+                                                <span>08min</span>
+                                            </td>
+                                            <td style="color:#00ff00; font-size:28px; font-weight:bold;">min</td>
+                                            </tr>
+                                        </table>
+
+                                        </td>
+                                        <td style="padding:20px; text-align:center; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5;">Participation</h2>
+
+                                        <!-- Minutes Block -->
+                                        <table cellpadding="6" cellspacing="4" style="margin:auto; background:#000; border-radius:8px;">
+                                            <tr>
+                                            <td style="background:#1c1c1c; color:#00ff00; font-size:32px; font-weight:bold; padding:12px 20px; border-radius:6px;">
+                                                <span>01min</span>
+                                            </td>
+                                            <td style="color:#00ff00; font-size:28px; font-weight:bold;">min</td>
+                                            </tr>
+                                        </table>
+
+                                        </td>
+
+                                        <td style="padding:20px; text-align:center; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5;">Contact de sécurité</h2>
+
+                                        <!-- Minutes Block -->
+                                        <table cellpadding="6" cellspacing="4" style="margin:auto; background:#000; border-radius:8px;">
+                                            <tr>
+                                            <td style="background:#1c1c1c; color:#00ff00; font-size:32px; font-weight:bold; padding:12px 20px; border-radius:6px;">
+                                                <span>01min</span>
+                                            </td>
+                                            <td style="color:#00ff00; font-size:28px; font-weight:bold;">min</td>
+                                            </tr>
+                                        </table>
+
+                                        </td>
+
+                                        <td style="padding:20px; text-align:center; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5;">Revue de la performance</h2>
+
+                                        <!-- Minutes Block -->
+                                        <table cellpadding="6" cellspacing="4" style="margin:auto; background:#000; border-radius:8px;">
+                                            <tr>
+                                            <td style="background:#1c1c1c; color:#00ff00; font-size:32px; font-weight:bold; padding:12px 20px; border-radius:6px;">
+                                                <span>03min</span>
+                                            </td>
+                                            <td style="color:#00ff00; font-size:28px; font-weight:bold;">min</td>
+                                            </tr>
+                                        </table>
+
+                                        </td>
+
+                                        <td style="padding:20px; text-align:center; font-size:14px; color:#333333;">
+                                        <h2 style="color:#0055a5;">Revue des actions et anomalies</h2>
+
+                                        <!-- Minutes Block -->
+                                        <table cellpadding="6" cellspacing="4" style="margin:auto; background:#000; border-radius:8px;">
+                                            <tr>
+                                            <td style="background:#1c1c1c; color:#00ff00; font-size:32px; font-weight:bold; padding:12px 20px; border-radius:6px;">
+                                                <span>01min</span>
+                                            </td>
+                                            <td style="color:#00ff00; font-size:28px; font-weight:bold;">min</td>
+                                            </tr>
+                                        </table>
+
+                                        </td>
+                                        
+                                    </tr>
+                                    </table>
+                                </tr>
+
+                                <tr>
+                                    <td style="height:20px;">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td style="height:0px;text-align: center;">
+                                        
+
+                                        <div>Lien d’accès à Daily meeting: <a
+                                                href="https://ocp-daily-meeting.ocpgroup.ma/">https://ocp-daily-meeting.ocpgroup.ma/</a>
+                                        </div>
+                                        <div>Lien d’accès à Input-Gathering: <a
+                                                href="">https://ocp-input-gathering.ocpgroup.ma/</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:20px;">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height:20px;">&nbsp;</td>
+                    </tr>
+                </table>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+
+</html>
