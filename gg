@@ -2,14 +2,6 @@ https://fastfile.ocpgroup.ma/download/7lz4d1y0ggvd3u12n3kcyqt5nghiyzn817a71qi31o
 182729
 cdea472ddeeaad56ff305dc96b6219e667c7685f
 https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1678
-<Box
-  sx={{
-    width: 48,
-    height: 48,
-    padding: '12px',
-    borderRadius: '50%',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }}
-/>
+<IconButton style={{ visibility: 'hidden' }}>
+  <span style={{ width: 24, height: 24 }} />
+</IconButton>
