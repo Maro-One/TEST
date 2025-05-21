@@ -1,2 +1,24 @@
-TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))
-    at Array.from (<anonymous>)
+
+export const renderMultipleCheckBox = ({input, values, label, "meta": {touched, error}, children, ...custom}: any) => (
+  <MuiThemeProvider theme={themeForm}>
+    <Select
+      {...input}
+      {...custom}
+      error={touched && error !== undefined}
+      value={values.changedList}
+      renderValue={selected => (reduceSizeByFieldByValues(values.nameField, selected))}
+      multiple
+    >
+      {values.list && values.list.map(name => (
+        <MenuItem key={name} value={name}>
+          <Checkbox
+            checked={values.changedList.indexOf(name) > -1}
+            style={styles.checkBox}
+          />
+          <ListItemText primary={name} />
+        </MenuItem>
+      ))}
+    </Select>
+    <FormHelperText error={error !== undefined}>{touched && error}</FormHelperText>
+  </MuiThemeProvider>
+);
