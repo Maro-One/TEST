@@ -23,5 +23,5 @@ export const renderMultipleCheckBox = ({input, values, label, "meta": {touched, 
   </MuiThemeProvider>
 );
 
-https://git.digilab.ocpgroup.ma/ecosystemplateform/ecosystem-portal/-/merge_requests/409
-8a58c57815f306bffdef0af8057e2facb62054fd
+hook.js:591 Material-UI: The key `select` provided to the classes prop is not implemented in SelectField.
+You can only override one of the following: commonField,fieldWithError,fieldWithRedBackground,errorSelectAnomaly,formControl. Error Component Stack
