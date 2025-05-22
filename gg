@@ -25,3 +25,11 @@ export const renderMultipleCheckBox = ({input, values, label, "meta": {touched, 
 
 hook.js:591 Material-UI: The key `select` provided to the classes prop is not implemented in SelectField.
 You can only override one of the following: commonField,fieldWithError,fieldWithRedBackground,errorSelectAnomaly,formControl. Error Component Stack
+
+Warning: validateDOMNesting(...): <form> cannot appear as a descendant of <form>.
+
+Material-UI: The key `autoCompletePaper` provided to the classes prop is not implemented in ForwardRef(Select).
+You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
+
+hook.js:591 Material-UI: The key `singleValue` provided to the classes prop is not implemented in SelectField.
+You can only override one of the following: commonField,fieldWithError,fieldWithRedBackground,errorSelectAnomaly,formControl. Error Component Stack
