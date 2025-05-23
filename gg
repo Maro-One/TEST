@@ -1,35 +1,4 @@
-
-export const renderMultipleCheckBox = ({input, values, label, "meta": {touched, error}, children, ...custom}: any) => (
-  <MuiThemeProvider theme={themeForm}>
-    <Select
-      {...input}
-      {...custom}
-      error={touched && error !== undefined}
-      value={values.changedList}
-      renderValue={selected => (reduceSizeByFieldByValues(values.nameField, selected))}
-      multiple
-    >
-      {values.list && values.list.map(name => (
-        <MenuItem key={name} value={name}>
-          <Checkbox
-            checked={values.changedList.indexOf(name) > -1}
-            style={styles.checkBox}
-          />
-          <ListItemText primary={name} />
-        </MenuItem>
-      ))}
-    </Select>
-    <FormHelperText error={error !== undefined}>{touched && error}</FormHelperText>
-  </MuiThemeProvider>
-);
-
-hook.js:591 Material-UI: The key `select` provided to the classes prop is not implemented in SelectField.
-You can only override one of the following: commonField,fieldWithError,fieldWithRedBackground,errorSelectAnomaly,formControl. Error Component Stack
-
-Warning: validateDOMNesting(...): <form> cannot appear as a descendant of <form>.
-
-Material-UI: The key `autoCompletePaper` provided to the classes prop is not implemented in ForwardRef(Select).
-You can only override one of the following: root,select,filled,outlined,selectMenu,disabled,icon,iconOpen,iconFilled,iconOutlined,nativeInput. Error Component Stack
-
-hook.js:591 Material-UI: The key `singleValue` provided to the classes prop is not implemented in SelectField.
-You can only override one of the following: commonField,fieldWithError,fieldWithRedBackground,errorSelectAnomaly,formControl. Error Component Stack
+SELECT column_name, COUNT(*)
+FROM table_name
+GROUP BY column_name
+HAVING COUNT(*) > 1;
