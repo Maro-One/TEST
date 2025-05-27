@@ -2,3 +2,5 @@ SELECT column_name, COUNT(*)
 FROM table_name
 GROUP BY column_name
 HAVING COUNT(*) > 1;
+
+Method threw 'java.lang.StackOverflowError' exception. Cannot evaluate ocp.jfc2.dailymeeting.entities.indicators.AffectationKPI$HibernateProxy$D1vh87TZ.toString()
