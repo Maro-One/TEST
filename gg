@@ -1,1 +1,2 @@
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing table [sap_divisions_de_maintenance]
+https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1682
+4ba5c7d2049a1f6f13661c296ffff5176ff84c17
