@@ -1,1 +1,27 @@
-https://git.digilab.ocpgroup.ma/jfc2/daily-meeting-mining
+"Request"
+{
+      "list" : [
+            {
+                  "avis" : "001123212"
+            },
+            {
+                  "avis" : "001123213"
+            }
+      ]
+}
+
+"Response"
+{
+      "list" : [
+            {
+                  "avis" : "001123212",
+                  "status" : "0001"
+            },
+            {
+                  "avis" : "001123213",
+                  "status" : "0002"
+            }
+      ]
+}
+
+ /RESTAdapter/api/dailymeeting/status/check/
