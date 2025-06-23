@@ -1,27 +1,2 @@
-"Request"
-{
-      "list" : [
-            {
-                  "avis" : "001123212"
-            },
-            {
-                  "avis" : "001123213"
-            }
-      ]
-}
-
-"Response"
-{
-      "list" : [
-            {
-                  "avis" : "001123212",
-                  "status" : "0001"
-            },
-            {
-                  "avis" : "001123213",
-                  "status" : "0002"
-            }
-      ]
-}
-
- /RESTAdapter/api/dailymeeting/status/check/
+https://git.digilab.ocpgroup.ma/jfc2/Daily-Meeting/-/merge_requests/1685
+aa1b1f9c2753b050066f88df6ac945c7fe05b902
