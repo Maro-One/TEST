@@ -1,5 +1,10 @@
-const renderMultiSelectWithCheckbox = ({ input, label, options }) => (
-  <FormControl fullWidth margin="normal">
+const renderMultiSelectWithCheckbox = ({
+  input,
+  label,
+  options = [],
+  meta: { touched, error },
+}) => (
+  <FormControl fullWidth margin="normal" error={touched && !!error}>
     <InputLabel>{label}</InputLabel>
     <Select
       multiple
@@ -9,7 +14,7 @@ const renderMultiSelectWithCheckbox = ({ input, label, options }) => (
     >
       {options.map((option) => (
         <MenuItem key={option} value={option}>
-          <Checkbox checked={input.value?.includes(option)} />
+          <Checkbox checked={(input.value || []).includes(option)} />
           <ListItemText primary={option} />
         </MenuItem>
       ))}
