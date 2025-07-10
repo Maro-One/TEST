@@ -1,1 +1,18 @@
-eb57e7923fffb15de072bc9b3ea3ddb53f951579
+const renderMultiSelectWithCheckbox = ({ input, label, options }) => (
+  <FormControl fullWidth margin="normal">
+    <InputLabel>{label}</InputLabel>
+    <Select
+      multiple
+      value={input.value || []}
+      onChange={(event) => input.onChange(event.target.value)}
+      renderValue={(selected) => selected.join(', ')}
+    >
+      {options.map((option) => (
+        <MenuItem key={option} value={option}>
+          <Checkbox checked={input.value?.includes(option)} />
+          <ListItemText primary={option} />
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+);
