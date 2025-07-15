@@ -42,3 +42,35 @@ users:
 - name: gitlabecosystem
   user:
     token: eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJlY29zeXN0ZW0iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoiZ2l0bGFiZWNvc3lzdGVtLXRva2VuLXI0cHcyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImdpdGxhYmVjb3N5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImE0YjdiMjRkLTk5MTMtMTFlYi04YTIzLTAwNTA1Njk3OTkyOSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDplY29zeXN0ZW06Z2l0bGFiZWNvc3lzdGVtIn0.DtVS59riWY34jVvHL5RrOgLKRdGF6ZDTXIzNEywRKMB3Hc89o8ubRTeOVaBJpq4PjqiwAomWod__07JCgtjIKCEO3M4ilgT0Kk4NAvxM5NaaKpgLWuncrjcr42qXTh79UM9far_Jlu3Dv9BnVYPHBK12eKp5X0orWIsyByCE5Ii_tYwO-wvxyxNKk2eL87G_YaEg037YUAJgBJ398TlIVlZAAXK6sXxypVylsBOoGmacXm1aMklE4A7YJ1H6TmcOeKyS02DApGHKlEgwJm4uABzQBt0xSTi9E5SbmvN-tXW4woH0aJrcPIZKjCwTma_3ww9LHJBpCFEABxlp73piTw
+
+
+const renderMultiSelectWithCheckbox = ({
+  input,
+  label,
+  options = [],
+  meta: { touched, error },
+}) => {
+  const selectedLabels = options
+    .filter((opt) => input.value?.includes(opt.id))
+    .map((opt) => opt.name)
+    .join(', ');
+
+  return (
+    <FormControl fullWidth margin="normal" error={touched && !!error}>
+      <InputLabel>{label}</InputLabel>
+      <Select
+        multiple
+        value={input.value || []}
+        onChange={(event) => input.onChange(event.target.value)}
+        renderValue={() => selectedLabels}
+      >
+        {options.map((option) => (
+          <MenuItem key={option.id} value={option.id}>
+            <Checkbox checked={(input.value || []).includes(option.id)} />
+            <ListItemText primary={option.name} />
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+};
